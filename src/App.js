@@ -9,7 +9,7 @@ import Setting from './containers/Setting';
 
 import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
-import Register from './containers/Register';
+import Register from './containers/Register/Register';
 
 const NotFound = () => {
     return <div>NotFound</div>;
