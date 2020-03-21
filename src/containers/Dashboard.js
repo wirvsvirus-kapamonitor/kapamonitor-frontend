@@ -7,6 +7,7 @@ import {TableCell} from "@material-ui/core";
 import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const mockEntry = {
     name: "Hotel Adlon Kempinski",
@@ -15,7 +16,7 @@ const mockEntry = {
     zipCode: "10117",
     city: "Berlin",
     numberOfBeds: 250,
-    freeBeds: 183
+    freeBeds: 180
 };
 
 const headCells = [
@@ -28,11 +29,8 @@ const headCells = [
     {id: "freeBeds", label: "Verfügbare Betten", numberic: true},
 ]
 
-const rows = [
-    mockEntry,
-    mockEntry,
-    mockEntry
-];
+const rows = (new Array(30)).fill(null).map(entry => mockEntry);
+
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -47,8 +45,9 @@ const Dashboard = props => {
                 <TableHead>
                     <TableRow>
                         {headCells.map(cell=> (
-                            <TableCell>{cell.label}</TableCell>
+                            <TableCell><strong>{cell.label}</strong></TableCell>
                         ))}
+                        <TableCell><strong>Auslastung</strong></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -57,6 +56,7 @@ const Dashboard = props => {
                             {headCells.map(cell => (
                                 <TableCell>{row[cell.id]}</TableCell>
                             ))}
+                            <TableCell><LinearProgress variant="determinate" value={row.numberOfBeds/row.freeBeds*100}></LinearProgress></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
