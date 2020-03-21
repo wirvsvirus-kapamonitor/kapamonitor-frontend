@@ -32,15 +32,12 @@ function First(props) {
 
         <Paper  className={classes.paper}>
 
-
             <Typography variant="h5">
                 First
             </Typography>
             <Typography variant="inherit">
                 für Unternehmer, die über Unterbringungskapazitäten verfügen
             </Typography>
-
-
 
         </Paper>
     );
