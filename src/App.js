@@ -55,7 +55,7 @@ class App extends Component {
         <div style={{ height: "100vh" }}>
           <Router>
             <Switch>
-              <DashboardRoute path="/map" component={Home} />
+              <DashboardRoute path="/dashboard" component={Home} />
               <DashboardRoute path="/register" component={Register} />
               <DashboardRoute path="/setting" component={Setting} />
               <DashboardRoute exact path="/" component={Home} />
