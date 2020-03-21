@@ -11,8 +11,13 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "clsx": "latest",
+    "geojson-world-map": "0.0.2",
+    "leaflet": "^1.6.0",
+    "leaflet.markercluster": "^1.4.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-leaflet": "^2.6.3",
+    "react-leaflet-markercluster": "^1.1.8",
     "react-scripts": "latest"
   },
   "browserslist": {

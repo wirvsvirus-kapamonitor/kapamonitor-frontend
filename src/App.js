@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+
 
 function Copyright() {
   return (
@@ -23,7 +25,7 @@ export default function App() {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Kapamonitor
+          Kapamonitor mit leaflet
         </Typography>
         <ProTip />
         <Copyright />
@@ -31,3 +33,5 @@ export default function App() {
     </Container>
   );
 }
+
+
