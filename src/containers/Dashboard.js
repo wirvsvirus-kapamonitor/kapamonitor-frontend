@@ -8,16 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-const mockEntry = {
-    name: "Hotel Adlon Kempinski",
-    street: "Unter den Linden",
-    streetNr: "77",
-    zipCode: "10117",
-    city: "Berlin",
-    numberOfBeds: 250,
-    freeBeds: 180
-};
+import {getAllLocations} from "../__MOCK__/mockData"
 
 const headCells = [
     {id: "name", label: "Name", numberic: false},
@@ -27,24 +18,35 @@ const headCells = [
     {id: "city", label: "Stadt", numberic: false},
     {id: "numberOfBeds", label: "Anzahl Betten", numberic: true},
     {id: "freeBeds", label: "Verfügbare Betten", numberic: true},
-]
+];
 
-const rows = (new Array(30)).fill(null).map(entry => mockEntry);
+const calcCapacity = row => (1 - row.freeBeds / row.numberOfBeds); // 0=all beds free, 1=all beds full
+
+const capacityColor = capacity => {
+    // TODO: the progress indicator only knows primary/secondary as colors. Need to write custom css for capacity states
+    if (capacity <= 0.1) return "secondary"; // critical capactiy (red)
+    if (capacity <= 0.5) return "secondary"; // medium capacity (yellow)
+    return "primary"
+};
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
 });
+
 const Dashboard = props => {
     const classes = useStyles();
+
+    // TODO: rows should be fetched from server and put in via props
+    const rows = getAllLocations();
 
     return (<div>
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        {headCells.map(cell=> (
+                        {headCells.map(cell => (
                             <TableCell><strong>{cell.label}</strong></TableCell>
                         ))}
                         <TableCell><strong>Auslastung</strong></TableCell>
@@ -52,17 +54,22 @@ const Dashboard = props => {
                 </TableHead>
                 <TableBody>
                     {rows.map(row => (
-                        <TableRow key={row.name}>
+                        <TableRow key={row.id}>
                             {headCells.map(cell => (
                                 <TableCell>{row[cell.id]}</TableCell>
                             ))}
-                            <TableCell><LinearProgress variant="determinate" value={row.numberOfBeds/row.freeBeds*100}></LinearProgress></TableCell>
+                            <TableCell>
+                                <LinearProgress
+                                    variant="determinate"
+                                    color={capacityColor(calcCapacity(row))}
+                                    value={calcCapacity(row) * 100}></LinearProgress>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
     </div>)
-}
+};
 
 export default Dashboard;
