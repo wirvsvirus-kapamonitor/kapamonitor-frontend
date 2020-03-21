@@ -18,32 +18,33 @@ const Home = props => {
         justifyContent: "center"
       }}
     >
-      <Card>
-        <CardContent>
-          <Typography variant="headline" headlineMapping={"h1"}>
-            Redux Example
-          </Typography>
-          <Typography
-            align="center"
-            variant="subheading"
-            headlineMapping={"h1"}
-          >
-            Counter: {props.stepCounter.counter}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button color="primary" variant="contained" onClick={props.increment}>
-            Increment
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={props.decrement}
-          >
-            Decrement
-          </Button>
-        </CardActions>
-      </Card>
+
+      {/*<Card>*/}
+      {/*  <CardContent>*/}
+      {/*    <Typography variant="headline" headlineMapping={"h1"}>*/}
+      {/*      Redux Example*/}
+      {/*    </Typography>*/}
+      {/*    <Typography*/}
+      {/*      align="center"*/}
+      {/*      variant="subheading"*/}
+      {/*      headlineMapping={"h1"}*/}
+      {/*    >*/}
+      {/*      Counter: {props.stepCounter.counter}*/}
+      {/*    </Typography>*/}
+      {/*  </CardContent>*/}
+      {/*  <CardActions>*/}
+      {/*    <Button color="primary" variant="contained" onClick={props.increment}>*/}
+      {/*      Increment*/}
+      {/*    </Button>*/}
+      {/*    <Button*/}
+      {/*      color="secondary"*/}
+      {/*      variant="contained"*/}
+      {/*      onClick={props.decrement}*/}
+      {/*    >*/}
+      {/*      Decrement*/}
+      {/*    </Button>*/}
+      {/*  </CardActions>*/}
+      {/*</Card>*/}
     </div>
   );
 };
