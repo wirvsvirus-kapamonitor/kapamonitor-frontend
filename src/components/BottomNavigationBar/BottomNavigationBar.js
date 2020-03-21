@@ -47,7 +47,7 @@ const BottomNavigationBar = props => {
     };
     return (
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-            <Link to="/">
+            <Link to="/dashboard">
                 <BottomNavigationAction label="Dashboard" value="dashboard" icon={<DashboardIcon/>}/>
             </Link>
             <Link to="/register"><BottomNavigationAction label="Register" value="register" icon={<CreateIcon/>}/></Link>
