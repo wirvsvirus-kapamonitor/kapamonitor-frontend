@@ -13,7 +13,6 @@ import Done from './Steps/Done';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-
     },
     paper: {
         padding: theme.spacing(2),
@@ -43,9 +42,8 @@ function Register(props) {
                 für Unternehmer, die über Unterbringungskapazitäten verfügen
             </Typography>
 
-
             <CustomizedStepper handleStepChange={handleStepChange}/>
-      
+
 
             {activeStep === 0 ? <First/> : null}
             {activeStep === 1 ? <Second/> : null}

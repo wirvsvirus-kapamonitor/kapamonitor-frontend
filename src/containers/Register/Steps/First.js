@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+        backgroundColor: "#B2ACFA"
     },
 }));
 
@@ -29,7 +30,7 @@ function First(props) {
 
     return (
 
-        <div  className={classes.root}>
+        <Paper  className={classes.paper}>
 
 
             <Typography variant="h5">
@@ -41,7 +42,7 @@ function First(props) {
 
 
 
-        </div>
+        </Paper>
     );
 }
 

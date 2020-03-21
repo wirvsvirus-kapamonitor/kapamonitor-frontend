@@ -159,6 +159,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
     },
+    buttonWrapper: {
+        display:"flex",
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+       
+    },
+
     button: {
         marginRight: theme.spacing(1),
     },
@@ -193,7 +201,7 @@ export default function CustomizedStepper(props) {
     useEffect(() => {
         console.log(activeStep)
         props.handleStepChange(activeStep)
-    },[activeStep])
+    }, [activeStep])
 
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -231,7 +239,7 @@ export default function CustomizedStepper(props) {
                 ) : (
                     <div>
                         <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                        <div>
+                        <div className={classes.buttonWrapper}>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Zurück
                             </Button>
