@@ -18,6 +18,7 @@ const styles = theme => ({
     marginRight: 36
   },
   title: {
+    marginLeft: 12,
     flexGrow: 1
   }
 });
@@ -27,14 +28,14 @@ const Header = props => {
   return (
     <AppBar position="fixed">
       <Toolbar disableGutters={true} classes={{ root: classes.toolbarRoot }}>
-        <IconButton
-          color="inherit"
-          aria-label="Open drawer"
-          onClick={handleToggleDrawer}
-          className={classes.menuButton}
-        >
-          <MenuIcon />
-        </IconButton>
+        {/*<IconButton*/}
+        {/*  color="inherit"*/}
+        {/*  aria-label="Open drawer"*/}
+        {/*  onClick={handleToggleDrawer}*/}
+        {/*  className={classes.menuButton}*/}
+        {/*>*/}
+        {/*  <MenuIcon />*/}
+        {/*</IconButton>*/}
         <Typography
           variant="title"
           color="inherit"
