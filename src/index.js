@@ -6,14 +6,13 @@ import App from './App';
 import theme from './theme';
 
 import Map from './Map';
-import GeoJsonMap from './GeoJsonMap';
 
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <GeoJsonMap />
+    <Map />
     <App />
   </ThemeProvider>,
   document.querySelector('#root'),
