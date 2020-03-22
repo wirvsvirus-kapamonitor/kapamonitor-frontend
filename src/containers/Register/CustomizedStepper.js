@@ -12,6 +12,8 @@ import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { setActiveStep } from '../../store/register/actions';
+import { connect } from 'react-redux';
 
 const QontoConnector = withStyles({
     alternativeLabel: {
@@ -195,32 +197,30 @@ function getStepContent(step) {
     }
 }
 
-export default function CustomizedStepper(props) {
+function CustomizedStepper(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
-    useEffect(() => {
-        console.log(activeStep)
-        props.handleStepChange(activeStep)
-    }, [activeStep])
-
     const handleNext = () => {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+
+        props.setActiveStep(   props.activeStep + 1)
+
     };
 
     const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        props.setActiveStep(   props.activeStep - 1)
+
     };
 
     const handleReset = () => {
-        setActiveStep(0);
+        props.setActiveStep(0)
+
     };
 
     return (
         <div className={classes.root}>
 
-            <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector/>}>
+            <Stepper alternativeLabel activeStep={props.activeStep} connector={<QontoConnector/>}>
                 {steps.map(label => (
                     <Step key={label}>
                         <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
@@ -229,7 +229,7 @@ export default function CustomizedStepper(props) {
             </Stepper>
 
             <div>
-                {activeStep === steps.length ? (
+                {props.activeStep === steps.length ? (
                     <div className={classes.buttonWrapper}>
 
                         <Button onClick={handleReset} className={classes.button}>
@@ -240,7 +240,7 @@ export default function CustomizedStepper(props) {
                     <div>
                         {/*<Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>*/}
                         <div className={classes.buttonWrapper}>
-                            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                            <Button disabled={props.activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Zurück
                             </Button>
                             <Button
@@ -249,7 +249,7 @@ export default function CustomizedStepper(props) {
                                 onClick={handleNext}
                                 className={classes.button}
                             >
-                                {activeStep === steps.length - 1 ? 'Fertig' : 'Weiter'}
+                                {props.activeStep === steps.length - 1 ? 'Fertig' : 'Weiter'}
                             </Button>
                         </div>
                     </div>
@@ -258,3 +258,15 @@ export default function CustomizedStepper(props) {
         </div>
     );
 }
+const mapStateToProps = state => ({
+
+    activeStep: state.registerUnit.activeStep,
+
+
+})
+
+const mapDispatchToProps = {
+    setActiveStep
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomizedStepper);
