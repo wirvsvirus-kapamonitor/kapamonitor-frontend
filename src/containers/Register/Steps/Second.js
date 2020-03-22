@@ -112,7 +112,7 @@ function Second(props) {
                         name={'street'}
                         onChange={handleChange('street')}
                         id="outlined-basic"
-                        label="street"
+                        label="Straße"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
@@ -121,7 +121,7 @@ function Second(props) {
                         name={'number'}
                         onChange={handleChange('number')}
                         id="outlined-basic"
-                        label="number"
+                        label="Hausnummer"
                         variant="outlined"/>
                 </div>
                 <div className={classes.besideWrapper}>
@@ -131,7 +131,7 @@ function Second(props) {
                         name={'postalCode'}
                         onChange={handleChange('postalCode')}
                         id="outlined-basic"
-                        label="postalCode"
+                        label="Postleitzahl"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
@@ -140,7 +140,7 @@ function Second(props) {
                         name={'city'}
                         onChange={handleChange('city')}
                         id="outlined-basic"
-                        label="city"
+                        label="Stadt"
                         variant="outlined"/>
                 </div>
                 <FormControlLabel

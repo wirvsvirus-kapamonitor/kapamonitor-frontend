@@ -96,7 +96,7 @@ function Third(props) {
                         name={'bedsWithDevicesCarpet'}
                         onChange={handleChange('bedsWithDevicesCarpet')}
                         id="outlined-basic"
-                        label="with Device"
+                        label="Mit Beatmungsgerät"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
@@ -105,7 +105,7 @@ function Third(props) {
                         name={'bedsWithoutDevicesCarpet'}
                         onChange={handleChange('bedsWithoutDevicesCarpet')}
                         id="outlined-basic"
-                        label="without Device"
+                        label="Ohne Beatmungsgerät"
                         variant="outlined"/>
                 </div>
                 <div className={classes.seperator}/>
@@ -117,7 +117,7 @@ function Third(props) {
                         name={'bedsWithDevices'}
                         onChange={handleChange('bedsWithDevices')}
                         id="outlined-basic"
-                        label="with Device"
+                        label="Mit Beatmungsgerät"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
@@ -126,7 +126,7 @@ function Third(props) {
                         name={'bedsWithoutDevices'}
                         onChange={handleChange('bedsWithoutDevices')}
                         id="outlined-basic"
-                        label="without Device"
+                        label="Ohne Beatmungsgerät"
                         variant="outlined"/>
 
                 </div>
@@ -137,7 +137,7 @@ function Third(props) {
                     name={'washbasins'}
                     onChange={handleChange('washbasins')}
                     id="outlined-basic"
-                    label="washbasins"
+                    label="Anzahl Waschbecken"
                     variant="outlined"/>
                 <TextField
                     className={classes.textField}
@@ -145,7 +145,7 @@ function Third(props) {
                     name={'showers'}
                     onChange={handleChange('showers')}
                     id="outlined-basic"
-                    label="showers"
+                    label="Anzahl Duschen"
                     variant="outlined"/>
 
                 <TextField
@@ -154,7 +154,7 @@ function Third(props) {
                     name={'toilets'}
                     onChange={handleChange('toilets')}
                     id="outlined-basic"
-                    label="toilets"
+                    label="Anzahl Toiletten"
                     variant="outlined"/>
 
 
