@@ -14,6 +14,17 @@ const initState = {
     hasInternet: false,
 
 
+    bedsWithDevicesCarpet: '',
+    bedsWithoutDevicesCarpet: '',
+
+    bedsWithDevices: '',
+    bedsWithoutDevices: '',
+
+    washbasins: '',
+    showers: '',
+    toilets: '',
+
+
     activeStep: 0,
 
     nav:"dashboard"

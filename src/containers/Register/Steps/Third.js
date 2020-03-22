@@ -92,18 +92,20 @@ function Third(props) {
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textFieldSmall}
-                        value={state.bedsWithDevicesCarpet}
+                        value={props.bedsWithDevicesCarpet}
                         name={'bedsWithDevicesCarpet'}
-                        onChange={handleChange('bedsWithDevicesCarpet')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                        // onChange={handleChange('bedsWithDevicesCarpet')}
                         id="outlined-basic"
                         label="Mit Beatmungsgerät"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
                         className={classes.textFieldSmall}
-                        value={state.bedsWithoutDevicesCarpet}
+                        value={props.bedsWithoutDevicesCarpet}
                         name={'bedsWithoutDevicesCarpet'}
-                        onChange={handleChange('bedsWithoutDevicesCarpet')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                        // onChange={handleChange('bedsWithoutDevicesCarpet')}
                         id="outlined-basic"
                         label="Ohne Beatmungsgerät"
                         variant="outlined"/>
@@ -113,18 +115,20 @@ function Third(props) {
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textField}
-                        value={state.bedsWithDevices}
+                        value={props.bedsWithDevices}
                         name={'bedsWithDevices'}
-                        onChange={handleChange('bedsWithDevices')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                        // onChange={handleChange('bedsWithDevices')}
                         id="outlined-basic"
                         label="Mit Beatmungsgerät"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
                         className={classes.textField}
-                        value={state.bedsWithoutDevices}
+                        value={props.bedsWithoutDevices}
                         name={'bedsWithoutDevices'}
-                        onChange={handleChange('bedsWithoutDevices')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                        // onChange={handleChange('bedsWithoutDevices')}
                         id="outlined-basic"
                         label="Ohne Beatmungsgerät"
                         variant="outlined"/>
@@ -133,26 +137,29 @@ function Third(props) {
 
                 <TextField
                     className={classes.textField}
-                    value={state.washbasins}
+                    value={props.washbasins}
                     name={'washbasins'}
-                    onChange={handleChange('washbasins')}
+                    onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                    // onChange={handleChange('washbasins')}
                     id="outlined-basic"
                     label="Anzahl Waschbecken"
                     variant="outlined"/>
                 <TextField
                     className={classes.textField}
-                    value={state.showers}
+                    value={props.showers}
                     name={'showers'}
-                    onChange={handleChange('showers')}
+                    onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                    // onChange={handleChange('showers')}
                     id="outlined-basic"
                     label="Anzahl Duschen"
                     variant="outlined"/>
 
                 <TextField
                     className={classes.textField}
-                    value={state.toilets}
+                    value={props.toilets}
                     name={'toilets'}
-                    onChange={handleChange('toilets')}
+                    onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
+                    // onChange={handleChange('toilets')}
                     id="outlined-basic"
                     label="Anzahl Toiletten"
                     variant="outlined"/>
@@ -167,9 +174,13 @@ function Third(props) {
 
 const mapStateToProps = state => ({
 
-    firstName: state.registerUnit.firstName,
-    lastName: state.registerUnit.lastName,
-    email: state.registerUnit.email
+    bedsWithDevicesCarpet: state.registerUnit.bedsWithDevicesCarpet,
+    bedsWithoutDevicesCarpet: state.registerUnit.bedsWithoutDevicesCarpet,
+    bedsWithDevices: state.registerUnit.bedsWithDevices,
+    bedsWithoutDevices: state.registerUnit.bedsWithoutDevices,
+    washbasins: state.registerUnit.washbasins,
+    showers: state.registerUnit.showers,
+    toilets: state.registerUnit.toilets,
 
 })
 
