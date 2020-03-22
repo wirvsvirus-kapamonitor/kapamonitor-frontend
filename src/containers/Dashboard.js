@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import {getAllLocations} from "../__MOCK__/mockData"
+// import {getAllLocations} from "../__MOCK__/mockData"
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -19,15 +19,14 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HotelIcon from '@material-ui/icons/Hotel';
-
+import {getAllLocations} from "../services/backend-rest-service";
 
 
 const headCells = [
     {id: "type", label: "Typ", numberic: false},
-    {id: "name", label: "Name", numberic: false},
+    {id: "title", label: "Name", numberic: false},
     {id: "street", label: "Strasse", numberic: false},
-    {id: "streetNr", label: "Hausnummer", numberic: false},
-    {id: "zipCode", label: "PLZ", numberic: true},
+    {id: "postCode", label: "PLZ", numberic: true},
     {id: "city", label: "Stadt", numberic: false},
     {id: "numberOfBeds", label: "Anzahl Betten", numberic: true},
     {id: "freeBeds", label: "Verfügbare Betten", numberic: true},
@@ -51,7 +50,7 @@ const useStyles = makeStyles({
 const getIconForType = type => {
     switch (type) {
         case "Hotel":
-            return (<HotelIcon  alt="Hotel"></HotelIcon>);
+            return (<HotelIcon alt="Hotel"></HotelIcon>);
             break;
         case "Hospital":
             return (<LocalHospitalIcon alt="Krankenhaus"></LocalHospitalIcon>);
@@ -59,13 +58,48 @@ const getIconForType = type => {
     }
 }
 
+const getNumberOfBedsForType = (row) => {
+    switch (row.type) {
+        case "Hotel":
+            return row.hotel.bedsWithVentilatorWithCarpet + row.hotel.bedsWithoutVentilatorWithCarpet + row.hotel.bedsWithVentilatorOtherFLoor;
+            break;
+        case "Hospital":
+            return row.hospital.bedsWithVentilator + row.hospital.bedsWithoutVentilator;
+            break;
+    }
+}
+
+const getCellContent = (row, cellId) => {
+    switch (cellId) {
+        case "street":
+            return `${row.street} ${row.houseNumber}`;
+            break;
+        case "type":
+            return getIconForType(row.type);
+            break;
+        case "numberOfBeds":
+            return getNumberOfBedsForType(row);
+            break;
+        default:
+            return row[cellId];
+    }
+};
+
 const Dashboard = props => {
     const classes = useStyles();
 
-    // TODO: rows should be fetched from server and put in via props
-    const rows = getAllLocations();
+    const [rows, setRows] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState(null);
+
+    useEffect(() => {
+        async function fetchRows() {
+            const res = await getAllLocations();
+            setRows(res.data);
+        }
+
+        fetchRows();
+    }, []);
 
     function handleClickOpen(index) {
         setOpen(true);
@@ -90,13 +124,13 @@ const Dashboard = props => {
                     {rows.map((row, index) => (
                         <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true}>
                             {headCells.map(cell => (
-                                <TableCell>{cell.id ==="type" ? getIconForType(row[cell.id]) : row[cell.id]}</TableCell>
+                                <TableCell>{getCellContent(row,  cell.id)}</TableCell>
                             ))}
                             <TableCell>
-                                <LinearProgress
+                                {row.type !== "unknown" && <LinearProgress
                                     variant="determinate"
                                     color={capacityColor(calcCapacity(row))}
-                                    value={calcCapacity(row) * 100}></LinearProgress>
+                                    value={calcCapacity(row) * 100}></LinearProgress>}
                             </TableCell>
                         </TableRow>
                     ))}
