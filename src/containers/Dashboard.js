@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HotelIcon from '@material-ui/icons/Hotel';
 import {getAllLocations} from "../services/backend-rest-service";
+import PaddingLayout from '../components/PaddingLayout';
 import {HospitalDetail} from "../components/HospitalDetail";
 
 
@@ -99,7 +100,7 @@ const Dashboard = props => {
     const handleClose = () => {
         setOpen(false);
     };
-    return (<div>
+    return (<PaddingLayout>
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
@@ -134,7 +135,7 @@ const Dashboard = props => {
                 </Button>
             </DialogActions>
         </Dialog>
-    </div>)
+    </PaddingLayout>)
 };
 
 export default Dashboard;

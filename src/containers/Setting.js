@@ -13,10 +13,11 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { toggleThemeMode, swapThemeColors } from "../store/reducers/settings";
+import { toggleThemeMode, swapThemeColors } from "../store/settings/settings";
+import PaddingLayout from '../components/PaddingLayout';
 
 const Settings = props => (
-  <div>
+  <PaddingLayout>
     <Typography variant="headline">Settings</Typography>
     <Card>
       <CardContent>
@@ -48,7 +49,7 @@ const Settings = props => (
         </List>
       </CardContent>
     </Card>
-  </div>
+  </PaddingLayout>
 );
 
 const mapStateToProps = state => {
