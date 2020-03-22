@@ -32,6 +32,21 @@ export default function registerUnitReducer(state = initState, action) {
                 ...state,
                 activeStep: action.step
             };
+        case types.RESET_ATTR:
+
+            return {
+                ...state,
+                lastName: '',
+                firstName: '',
+                email: '',
+                phone: '',
+
+                street: '',
+                number: '',
+                postalCode: '',
+                city: '',
+                hasInternet: false,
+            };
         case types.SET_NAVIGATION:
             return {
                 ...state,

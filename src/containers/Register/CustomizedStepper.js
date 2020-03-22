@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -11,8 +11,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { setActiveStep } from '../../store/register/actions';
+import { resetAttr, setActiveStep } from '../../store/register/actions';
 import { connect } from 'react-redux';
 
 const QontoConnector = withStyles({
@@ -203,18 +202,19 @@ function CustomizedStepper(props) {
 
     const handleNext = () => {
 
-        props.setActiveStep(   props.activeStep + 1)
+        props.setActiveStep(props.activeStep + 1)
 
     };
 
     const handleBack = () => {
-        props.setActiveStep(   props.activeStep - 1)
+        props.setActiveStep(props.activeStep - 1)
 
     };
 
     const handleReset = () => {
         props.setActiveStep(0)
-
+        //reset
+        props.resetAttr()
     };
 
     return (
@@ -258,6 +258,7 @@ function CustomizedStepper(props) {
         </div>
     );
 }
+
 const mapStateToProps = state => ({
 
     activeStep: state.registerUnit.activeStep,
@@ -266,7 +267,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    setActiveStep
+    setActiveStep,
+    resetAttr
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomizedStepper);

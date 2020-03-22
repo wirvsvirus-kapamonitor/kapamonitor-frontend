@@ -11,6 +11,11 @@ export const setActiveStep = (step) => ({
   type: types.SET_ACTIVE_STEP,
   step
 });
+
+export const resetAttr = () => ({
+  type: types.RESET_ATTR,
+});
+
 export const setNavigation = (nav) => ({
   type: types.SET_NAVIGATION,
   nav

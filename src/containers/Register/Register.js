@@ -49,7 +49,7 @@ function Register(props) {
                 Unterbringung registrieren
             </Typography>
             <Typography variant="inherit">
-                für Unternehmer, die über Unterbringungskapazitäten verfügen
+                Für Unternehmer, die über Unterbringungskapazitäten verfügen
             </Typography>
 
             <CustomizedStepper handleStepChange={handleStepChange}/>

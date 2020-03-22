@@ -7,7 +7,7 @@ const persistConfig = {
     key: 'root',
     storage,
     blacklist: [
-        'registerUnit'
+        // 'registerUnit'
     ],
 }
 
