@@ -1,33 +1,33 @@
-import React, {useEffect} from "react";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import {TableCell} from "@material-ui/core";
-import TableRow from "@material-ui/core/TableRow";
-import TableHead from "@material-ui/core/TableHead";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
+import React, { useEffect } from 'react';
+import TableContainer from '@material-ui/core/TableContainer';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import { TableCell } from '@material-ui/core';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HotelIcon from '@material-ui/icons/Hotel';
-import {getAllLocations} from "../services/backend-rest-service";
+import { getAllLocations } from '../services/backend-rest-service';
 import PaddingLayout from '../components/PaddingLayout';
-import {HospitalDetail} from "../components/HospitalDetail";
+import { HospitalDetail } from '../components/HospitalDetail';
 import { setRawLocations } from '../store/leaflet/actions';
 import { connect } from 'react-redux';
 
 export const headCells = [
-    {id: "type", label: "Typ", numberic: false},
-    {id: "title", label: "Name", numberic: false},
-    {id: "street", label: "Strasse", numberic: false},
-    {id: "postCode", label: "PLZ", numberic: true},
-    {id: "city", label: "Stadt", numberic: false},
-    {id: "numberOfBeds", label: "Anzahl Betten", numberic: true},
-    {id: "freeBeds", label: "Auslastung", numberic: true},
+    { id: 'type', label: 'Typ', numberic: false },
+    { id: 'title', label: 'Name', numberic: false },
+    { id: 'street', label: 'Strasse', numberic: false },
+    { id: 'postCode', label: 'PLZ', numberic: true },
+    { id: 'city', label: 'Stadt', numberic: false },
+    { id: 'numberOfBeds', label: 'Anzahl Betten', numberic: true },
+    { id: 'freeBeds', label: 'Auslastung', numberic: true },
 ];
 
 const useStyles = makeStyles({
@@ -35,16 +35,16 @@ const useStyles = makeStyles({
         minWidth: 650,
     },
     tableRow: {
-        cursor: "pointer",
+        cursor: 'pointer',
     }
 });
 
 const getIconForType = type => {
     switch (type) {
-        case "Hotel":
+        case 'Hotel':
             return (<HotelIcon alt="Hotel"></HotelIcon>);
             break;
-        case "Hospital":
+        case 'Hospital':
             return (<LocalHospitalIcon alt="Krankenhaus"></LocalHospitalIcon>);
             break;
     }
@@ -52,26 +52,26 @@ const getIconForType = type => {
 
 const getNumberOfBedsForType = (row) => {
     switch (row.type) {
-        case "Hotel":
+        case 'Hotel':
             return row.hotel.bedsWithVentilatorWithCarpet + row.hotel.bedsWithoutVentilatorWithCarpet + row.hotel.bedsWithVentilatorOtherFLoor;
             break;
-        case "Hospital":
+        case 'Hospital':
             return row.hospital.bedsWithVentilator + row.hospital.bedsWithoutVentilator;
             break;
     }
 }
 const getCellContent = (row, cellId) => {
     switch (cellId) {
-        case "street":
+        case 'street':
             return `${row.street} ${row.houseNumber}`;
             break;
-        case "type":
+        case 'type':
             return getIconForType(row.type);
             break;
-        case "numberOfBeds":
+        case 'numberOfBeds':
             return getNumberOfBedsForType(row);
             break;
-        case "freeBeds":
+        case 'freeBeds':
             return <LinearProgress
                 variant="determinate"
                 value={row.capacity}></LinearProgress>;
@@ -92,11 +92,15 @@ const Dashboard = props => {
 
             if (res.status === 200) {
                 if (res.data.length > 0) {
-                    const mockCapacity = res.data.map(location => ({...location, capacity: Math.floor(Math.random() * 100)}));
+                    const mockCapacity = res.data.map(location => ({
+                        ...location,
+                        capacity: Math.floor(Math.random() * 100)
+                    }));
                     props.setRawLocations(mockCapacity);
                 }
             }
         }
+
         fetchRows();
     }, []);
 
@@ -118,13 +122,14 @@ const Dashboard = props => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.rawLocations.map((row, index) => (
-                        <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true} className={classes.tableRow}>
+                    {props.rawLocations ? props.rawLocations.map((row, index) => (
+                        <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true}
+                                  className={classes.tableRow}>
                             {headCells.map(cell => (
                                 <TableCell>{getCellContent(row, cell.id)}</TableCell>
                             ))}
                         </TableRow>
-                    ))}
+                    )) : null}
                 </TableBody>
             </Table>
         </TableContainer>

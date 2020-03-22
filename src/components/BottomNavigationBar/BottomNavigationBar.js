@@ -56,7 +56,7 @@ const BottomNavigationBar = props => {
                 <BottomNavigationAction label="Map" value="map" icon={<MapIcon/>}/>
             </Link>
             <Link to="/register"><BottomNavigationAction label="Register" value="register" icon={<CreateIcon/>}/></Link>
-            <Link to={"setting"}><BottomNavigationAction label="Profile" value="profile" icon={<SettingsIcon/>}/></Link>
+            {/*<Link to={"setting"}><BottomNavigationAction label="Profile" value="profile" icon={<SettingsIcon/>}/></Link>*/}
 
         </BottomNavigation>
     );

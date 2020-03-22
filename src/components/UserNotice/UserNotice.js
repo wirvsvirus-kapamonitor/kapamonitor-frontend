@@ -20,7 +20,7 @@ function UserNotice(props) {
         >
             <DialogTitle>Disclaimer</DialogTitle>
          <DialogContent>   Die hier präsentierten Daten sind als Demonstrationsdaten zu verstehen und stellen keine Abbildung der Realität dar,
-             sollen keine Auskunft über die Realität geben und haben in keiner Form Bezug zu den genannten Personen und Einrichtungen. Jegliche Ähnlichkeit ist zufällig und Unbeabsichtigt.
+             sollen keine Auskunft über die Realität geben und haben in keiner Form Bezug zu den genannten Personen und Einrichtungen. Jegliche Ähnlichkeit ist zufällig und unbeabsichtigt.
              Weiterhin werden keine Personenbezogenen Daten verarbeitet oder gespeichert und die hier zur Verfügung gestellten Masken sind ausschließlich als Demonstrationsmuster zu verstehen.
              Ich habe die oben dargelegten Informationen und Sachverhalte verstanden und stimme diesen durch meine Nutzung zu.
          </DialogContent>
