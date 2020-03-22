@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { setFormAttribute} from '../../../store/register/actions';
@@ -51,7 +51,7 @@ function First(props) {
                         className={classes.textField}
                         value={props.lastName}
                         name={'lastName'}
-                        onChange={event => props.setLastname(event.target.name, event.target.value)}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="ln-input"
                         label="Nachname"
                         variant="outlined"/>
@@ -60,7 +60,7 @@ function First(props) {
                         className={classes.textField}
                         value={props.firstName}
                         name={'firstName'}
-                        onChange={event => props.setLastname(event.target.name, event.target.value)}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="fn-input"
                         label="Vorname"
                         variant="outlined"/>
@@ -69,14 +69,14 @@ function First(props) {
                 <TextField className={classes.textField}
                            value={props.email}
                            name={'email'}
-                           onChange={event => props.setLastname(event.target.name, event.target.value)}
+                           onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                            id="email-intpu"
                            label="Email"
                            variant="outlined"/>
                 <TextField className={classes.textField}
                            value={props.phone}
                            name={'phone'}
-                           onChange={event => props.setLastname(event.target.name, event.target.value)}
+                           onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                            id="phone-input"
                            label="Telefonnummer"
                            variant="outlined"/>
