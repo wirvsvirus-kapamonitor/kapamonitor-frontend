@@ -160,6 +160,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
     },
     buttonWrapper: {
+        marginTop: theme.spacing(3),
         display:"flex",
         width: '100%',
         justifyContent: 'center',
@@ -238,7 +239,7 @@ export default function CustomizedStepper(props) {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                        {/*<Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>*/}
                         <div className={classes.buttonWrapper}>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Zurück
