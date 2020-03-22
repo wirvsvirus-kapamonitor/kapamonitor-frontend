@@ -1,7 +1,7 @@
 import types from '../types';
 
 const initState = {
-    lastName: 'Hans',
+    lastName: '',
     firstName: '',
     email: '',
     phone: '',
