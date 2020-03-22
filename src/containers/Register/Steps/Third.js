@@ -79,16 +79,6 @@ function Third(props) {
         console.log(event.target, prop)
     }
 
-    const [locationType, setLocationType] = React.useState('hotel');
-
-    const handleChangeSelect = event => {
-        setLocationType(event.target.value);
-    };
-
-    const [internet, setInternet] = React.useState(false);
-    const handleChangeInternet = event => {
-        internet ? setInternet(false) : setInternet(true)
-    };
 
 
     return (
