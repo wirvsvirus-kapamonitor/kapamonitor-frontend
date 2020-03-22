@@ -58,7 +58,6 @@ function First(props) {
         })
 
 
-        console.log(event.target, prop)
     }
 
 

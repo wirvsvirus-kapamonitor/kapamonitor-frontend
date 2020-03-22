@@ -3,7 +3,7 @@ const SET_FIRSTNAME = "registerUnit/SET_FIRSTNAME";
 const SET_EMAIL = "registerUnit/SET_EMAIL";
 
 const initState = {
-  lastName: '',
+  lastName: 'ddd',
   firstName: '',
   email: '',
   phone: '',
