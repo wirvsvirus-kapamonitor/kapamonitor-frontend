@@ -80,6 +80,8 @@ const getCellContent = (row, cellId) => {
         case "numberOfBeds":
             return getNumberOfBedsForType(row);
             break;
+        case "freeBeds":
+            return Math.floor(getNumberOfBedsForType(row) * Math.random());
         default:
             return row[cellId];
     }
