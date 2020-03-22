@@ -19,6 +19,13 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    wrapper: {
+        marginTop: 20,
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+    },
 }));
 
 
@@ -44,11 +51,13 @@ function Register(props) {
 
             <CustomizedStepper handleStepChange={handleStepChange}/>
 
+            <div className={classes.wrapper}>
+                {activeStep === 0 ? <First/> : null}
+                {activeStep === 1 ? <Second/> : null}
+                {activeStep === 2 ? <Third/> : null}
+                {activeStep === 3 ? <Done/> : null}
+            </div>
 
-            {activeStep === 0 ? <First/> : null}
-            {activeStep === 1 ? <Second/> : null}
-            {activeStep === 2 ? <Third/> : null}
-            {activeStep === 3 ? <Done/> : null}
 
         </div>
     );

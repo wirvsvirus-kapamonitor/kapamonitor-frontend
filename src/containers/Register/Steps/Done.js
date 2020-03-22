@@ -1,16 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { swapThemeColors, toggleThemeMode } from '../../../store/reducers/settings';
-import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        marginTop:20,
         flexGrow: 1,
-
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
     },
     paper: {
         padding: theme.spacing(2),
@@ -20,24 +21,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
-
 function Done(props) {
 
     const classes = useStyles();
 
     return (
 
-        <div  className={classes.root}>
+        <div className={classes.root}>
 
 
-            <Typography variant="h5">
-                Done
-            </Typography>
             <Typography variant="inherit">
-                für Unternehmer, die über Unterbringungskapazitäten verfügen
+               Vielen Dank für die Registrierung!
             </Typography>
-
 
 
         </div>

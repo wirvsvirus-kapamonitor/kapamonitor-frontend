@@ -158,10 +158,11 @@ ColorlibStepIcon.propTypes = {
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
+        marginTop: 20,
     },
     buttonWrapper: {
         marginTop: theme.spacing(3),
-        display:"flex",
+        display: 'flex',
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -196,7 +197,7 @@ function getStepContent(step) {
 
 export default function CustomizedStepper(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(1);
+    const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
     useEffect(() => {
@@ -229,12 +230,10 @@ export default function CustomizedStepper(props) {
 
             <div>
                 {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>
-                            Alle Angaben wurden gemacht- fertig!
-                        </Typography>
+                    <div className={classes.buttonWrapper}>
+
                         <Button onClick={handleReset} className={classes.button}>
-                            Reset
+                            Nochmal
                         </Button>
                     </div>
                 ) : (

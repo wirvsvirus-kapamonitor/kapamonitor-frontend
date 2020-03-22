@@ -90,7 +90,7 @@ function Second(props) {
     return (
         <div className={classes.root}>
             <FormControl className={classes.formControl}>
-                <FormHelperText>Art der Lokalität</FormHelperText>
+
                 <Select
                     variant="outlined"
                     className={classes.selectEmpty}
@@ -103,7 +103,7 @@ function Second(props) {
                     <MenuItem value={'gym'}>Turnhalle</MenuItem>
                     <MenuItem value={'open-space'}>Freie Fläche</MenuItem>
                 </Select>
-
+                <FormHelperText>Art der Lokalität</FormHelperText>
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textField}
