@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import MarkerCluster from './MarkerCluster';
 import { makeStyles } from '@material-ui/core/styles';
 import 'leaflet/dist/leaflet.css';
+import { getAllLocations } from '../../services/backend-rest-service';
+import { setLocations } from '../../store/leaflet/actions';
+import { connect } from 'react-redux';
 
 const position = [52.520, 13.404];
 const mapStyle = { height: '90vh', zIndex: 1 };
@@ -50,9 +53,39 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Leaflet = () => {
+function Leaflet(props) {
     const classes = useStyles();
-    const [markers, setMarkers] = useState(myCustomArray);
+
+    useEffect(() => {
+        async function fetchRows() {
+            const res = await getAllLocations();
+            const arr = []
+
+            console.log(arr)
+
+            if (res.status === 200) {
+                if(res.data.length > 0){
+                    res.data.map(item => {
+                        arr.push(
+                            {
+                                position: { lng: item.geoLatitude, lat: item.geoLongitude },
+                                text: item.title,
+                                workload: item.hospital ? item.hospital.bedsWithVentilator : 60
+                            }
+                        )
+                    })
+                    props.setLocations(arr)
+                }
+            }
+
+
+            console.log("res",res.status)
+
+
+        }
+
+        fetchRows();
+    }, []);
 
     return (
         <div className={classes.root}>
@@ -61,10 +94,21 @@ const Leaflet = () => {
                     url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
-                <MarkerCluster markers={markers}/>
+                <MarkerCluster markers={props.locations}/>
             </Map>
         </div>
     );
 };
+const mapStateToProps = state => ({
+    locations: state.leaflet.locations,
+})
 
-export default Leaflet;
+const mapDispatchToProps = {
+    setLocations
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Leaflet);
+
