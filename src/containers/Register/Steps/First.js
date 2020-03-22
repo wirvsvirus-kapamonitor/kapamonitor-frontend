@@ -3,11 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { swapThemeColors, toggleThemeMode } from '../../../store/reducers/settings';
+import { setLastname,setFirstname,setEmail } from '../../../store/reducers/registerUnit';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,20 +23,20 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
         width: '100%',
     },
-    besideWrapper:{
-      display:"flex",
-        flexDirection:"row",
+    besideWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
 
     },
-    textFieldBeside:{
+    textFieldBeside: {
         marginTop: theme.spacing(2),
         width: '100%',
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
-    space:{
-        width:20
+    space: {
+        width: 20
     }
 }));
 
@@ -59,6 +57,7 @@ function First(props) {
             [prop]: event.target.value,
         })
 
+
         console.log(event.target, prop)
     }
 
@@ -70,27 +69,27 @@ function First(props) {
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textField}
-                        value={state.lastName}
+                        value={props.lastName}
                         name={'firstName'}
-                        onChange={handleChange('lastName')}
+                        onChange={event => props.setLastname(event.target.value)}
                         id="outlined-basic"
                         label="Nachname"
                         variant="outlined"/>
-                        <div className={classes.space}/>
+                    <div className={classes.space}/>
                     <TextField
                         className={classes.textField}
-                        value={state.firstName}
+                        value={props.firstName}
                         name={'firstName'}
-                        onChange={handleChange('firstName')}
+                        onChange={event => props.setFirstname(event.target.value)}
                         id="outlined-basic"
                         label="Vorname"
                         variant="outlined"/>
                 </div>
 
                 <TextField className={classes.textField}
-                           value={state.email}
+                           value={props.email}
                            name={'firstName'}
-                           onChange={handleChange('email')}
+                           onChange={event => props.setEmail(event.target.value)}
                            id="outlined-basic"
                            label="Email"
                            variant="outlined"/>
@@ -109,13 +108,18 @@ function First(props) {
 
 const mapStateToProps = state => {
     return {
-        settings: state.settings
+        firstName: state.registerUnit.firstName,
+        lastName: state.registerUnit.lastName,
+        email: state.registerUnit.email,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
+            setLastname: value => setLastname(value),
+            setFirstname: value => setFirstname(value),
+            setEmail: value => setEmail(value),
             toggleThemeMode: checked => toggleThemeMode(checked),
             swapThemeColors: checked => swapThemeColors(checked)
         },
