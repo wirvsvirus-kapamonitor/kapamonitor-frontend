@@ -14,8 +14,20 @@ const initState = {
     hasInternet: false,
 
 
-    activeStep: 0
+    bedsWithDevicesCarpet: '',
+    bedsWithoutDevicesCarpet: '',
 
+    bedsWithDevices: '',
+    bedsWithoutDevices: '',
+
+    washbasins: '',
+    showers: '',
+    toilets: '',
+
+
+    activeStep: 0,
+
+    nav:"dashboard"
 };
 
 export default function registerUnitReducer(state = initState, action) {
@@ -30,6 +42,36 @@ export default function registerUnitReducer(state = initState, action) {
             return {
                 ...state,
                 activeStep: action.step
+            };
+        case types.RESET_ATTR:
+
+            return {
+                ...state,
+                lastName: '',
+                firstName: '',
+                email: '',
+                phone: '',
+
+                street: '',
+                number: '',
+                postalCode: '',
+                city: '',
+                hasInternet: false,
+
+                bedsWithDevicesCarpet: '',
+                bedsWithoutDevicesCarpet: '',
+
+                bedsWithDevices: '',
+                bedsWithoutDevices: '',
+
+                washbasins: '',
+                showers: '',
+                toilets: '',
+            };
+        case types.SET_NAVIGATION:
+            return {
+                ...state,
+                nav: action.nav
             };
         default:
             return state;
