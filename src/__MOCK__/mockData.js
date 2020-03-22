@@ -1,5 +1,6 @@
 const mockEntry = {
     id: "1",
+    type: "Hotel",
     name: "Hotel Adlon Kempinski",
     street: "Unter den Linden",
     streetNr: "77",
@@ -10,6 +11,7 @@ const mockEntry = {
 };
 const mockEntry2 = {
     id: "2",
+    type: "Hotel",
     name: "Hotel NH",
     street: "Alexanderplatz",
     streetNr: "12",
@@ -20,6 +22,7 @@ const mockEntry2 = {
 };
 const mockEntry3 = {
     id: "2",
+    type: "Hospital",
     name: "Hotel Bayrischer Hof",
     street: "Münchnerstr.12",
     streetNr: "20",

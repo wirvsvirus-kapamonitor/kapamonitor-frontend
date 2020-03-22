@@ -17,8 +17,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import HotelIcon from '@material-ui/icons/Hotel';
+
+
 
 const headCells = [
+    {id: "type", label: "Typ", numberic: false},
     {id: "name", label: "Name", numberic: false},
     {id: "street", label: "Strasse", numberic: false},
     {id: "streetNr", label: "Hausnummer", numberic: false},
@@ -42,6 +47,17 @@ const useStyles = makeStyles({
         minWidth: 650,
     },
 });
+
+const getIconForType = type => {
+    switch (type) {
+        case "Hotel":
+            return (<HotelIcon  alt="Hotel"></HotelIcon>);
+            break;
+        case "Hospital":
+            return (<LocalHospitalIcon alt="Krankenhaus"></LocalHospitalIcon>);
+            break;
+    }
+}
 
 const Dashboard = props => {
     const classes = useStyles();
@@ -72,9 +88,9 @@ const Dashboard = props => {
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => (
-                        <TableRow key={row.id} onClick={() => handleClickOpen(index)}>
+                        <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true}>
                             {headCells.map(cell => (
-                                <TableCell>{row[cell.id]}</TableCell>
+                                <TableCell>{cell.id ==="type" ? getIconForType(row[cell.id]) : row[cell.id]}</TableCell>
                             ))}
                             <TableCell>
                                 <LinearProgress
