@@ -8,21 +8,17 @@ import TableRow from "@material-ui/core/TableRow";
 import TableHead from "@material-ui/core/TableHead";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-// import {getAllLocations} from "../__MOCK__/mockData"
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HotelIcon from '@material-ui/icons/Hotel';
 import {getAllLocations} from "../services/backend-rest-service";
+import {HospitalDetail} from "../components/HospitalDetail";
 
 
-const headCells = [
+export const headCells = [
     {id: "type", label: "Typ", numberic: false},
     {id: "title", label: "Name", numberic: false},
     {id: "street", label: "Strasse", numberic: false},
@@ -71,13 +67,15 @@ const getCellContent = (row, cellId) => {
             return getNumberOfBedsForType(row);
             break;
         case "freeBeds":
-            return (<LinearProgress
-                variant="determinate"
-                value={Math.floor(Math.random() * 100)}></LinearProgress>);
+            return <RandomProgressBar/>;
         default:
             return row[cellId];
     }
 };
+
+export const RandomProgressBar = () => (<LinearProgress
+                variant="determinate"
+                value={Math.floor(Math.random() * 100)}></LinearProgress>)
 
 const Dashboard = props => {
     const classes = useStyles();
@@ -91,13 +89,11 @@ const Dashboard = props => {
             const res = await getAllLocations();
             setRows(res.data);
         }
-
         fetchRows();
     }, []);
 
     function handleClickOpen(index) {
         setOpen(true);
-        console.log(index)
         setSelectedRow(index)
     };
     const handleClose = () => {
@@ -130,7 +126,8 @@ const Dashboard = props => {
             fullWidth={true}
             maxWidth="md"
         >
-            <PopupContent rows={rows} index={selectedRow}/>
+            <DialogTitle>{rows[selectedRow] && rows[selectedRow].title}</DialogTitle>
+            <HospitalDetail location={rows[selectedRow]}></HospitalDetail>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Ok
@@ -139,31 +136,5 @@ const Dashboard = props => {
         </Dialog>
     </div>)
 };
-
-const PopupContent = props => {
-    const row = props.rows[props.index];
-    return row ? (
-        <React.Fragment>
-            <DialogTitle>{row.name}</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    <Grid container direction="column" spacing={3}>
-                        {headCells.map(cell => (
-                            <Grid item>
-                                <TextField
-                                    label={cell.label}
-                                    defaultValue={row[cell.id]}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>
-                </DialogContentText>
-            </DialogContent>
-        </React.Fragment>
-    ) : (<div>error loading</div>)
-}
 
 export default Dashboard;

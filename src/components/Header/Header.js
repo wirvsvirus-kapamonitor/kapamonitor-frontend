@@ -37,12 +37,12 @@ const Header = props => {
         {/*  <MenuIcon />*/}
         {/*</IconButton>*/}
         <Typography
-          variant="title"
+          variant="h4"
           color="inherit"
           noWrap
           className={classes.title}
         >
-          Kapamonitor
+          KapaMonitor
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
