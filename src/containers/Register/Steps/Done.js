@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { swapThemeColors, toggleThemeMode } from '../../../store/reducers/settings';
+import { swapThemeColors, toggleThemeMode } from '../../../store/settings/settings';
 
 const useStyles = makeStyles(theme => ({
     root: {

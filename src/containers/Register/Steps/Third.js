@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { swapThemeColors, toggleThemeMode } from '../../../store/reducers/settings';
+import { swapThemeColors, toggleThemeMode } from '../../../store/settings/settings';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { setFormAttribute } from '../../../store/register/actions';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -79,16 +80,6 @@ function Third(props) {
         console.log(event.target, prop)
     }
 
-    const [locationType, setLocationType] = React.useState('hotel');
-
-    const handleChangeSelect = event => {
-        setLocationType(event.target.value);
-    };
-
-    const [internet, setInternet] = React.useState(false);
-    const handleChangeInternet = event => {
-        internet ? setInternet(false) : setInternet(true)
-    };
 
 
     return (
@@ -174,20 +165,16 @@ function Third(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        settings: state.settings
-    };
-};
+const mapStateToProps = state => ({
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            toggleThemeMode: checked => toggleThemeMode(checked),
-            swapThemeColors: checked => swapThemeColors(checked)
-        },
-        dispatch
-    );
+    firstName: state.registerUnit.firstName,
+    lastName: state.registerUnit.lastName,
+    email: state.registerUnit.email
+
+})
+
+const mapDispatchToProps = {
+    setFormAttribute
 };
 
 export default connect(

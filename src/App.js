@@ -46,23 +46,24 @@ class App extends Component {
     render() {
         const { settings } = this.props;
 
-    return (
-      <MuiThemeProvider theme={settings.theme}>
-        <CssBaseline />
-        <div style={{ height: "100vh" }}>
-          <Router>
-            <Switch>
-              <DashboardRoute path="/dashboard" component={Dashboard}/>
-              <DashboardRoute path="/register" component={Register}/>
-              <DashboardRoute path="/setting" component={Setting}/>
-              <DashboardRoute exact path="/" component={Dashboard}/>
-              <EmptyRoute component={NotFound}/>
-            </Switch>
-          </Router>
-        </div>
-      </MuiThemeProvider>
-    );
-  }
+        return (
+            <MuiThemeProvider>
+                <CssBaseline/>
+                <div style={{ height: '100vh' }}>
+                    <Router>
+                        <Switch>
+                            <DashboardRoute path="/dashboard" component={Dashboard}/>
+                            <DashboardRoute path="/register" component={Register}/>
+                            <DashboardRoute path="/setting" component={Setting}/>
+                            <DashboardRoute exact path="/" component={Dashboard}/>
+                            <EmptyRoute component={NotFound}/>
+                        </Switch>
+                    </Router>
+                </div>
+            </MuiThemeProvider>
+        );
+    }
+
 }
 
 const mapStateToProps = state => {
