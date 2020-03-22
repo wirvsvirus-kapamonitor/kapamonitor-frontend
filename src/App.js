@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
 import Register from './containers/Register/Register';
 import Dashboard from "./containers/Dashboard";
+import Leaflet from "./containers/Leaflet/Leaflet";
 
 
 const NotFound = () => {
@@ -53,6 +54,7 @@ class App extends Component {
                     <Router>
                         <Switch>
                             <DashboardRoute path="/dashboard" component={Dashboard}/>
+                            <DashboardRoute path="/map" component={Leaflet}/>
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
                             <DashboardRoute exact path="/" component={Dashboard}/>
