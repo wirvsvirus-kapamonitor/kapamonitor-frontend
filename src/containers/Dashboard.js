@@ -72,31 +72,28 @@ const getCellContent = (row, cellId) => {
             return getNumberOfBedsForType(row);
             break;
         case "freeBeds":
-            return <RandomProgressBar/>;
+            return <LinearProgress
+                variant="determinate"
+                value={row.capacity}></LinearProgress>;
         default:
             return row[cellId];
     }
 };
 
-export const RandomProgressBar = () => (<LinearProgress
-                variant="determinate"
-                value={Math.floor(Math.random() * 100)}></LinearProgress>)
-
 const Dashboard = props => {
     const classes = useStyles();
 
-    const [rows, setRows] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState(null);
 
     useEffect(() => {
         async function fetchRows() {
             const res = await getAllLocations();
-            setRows(res.data);
 
             if (res.status === 200) {
                 if (res.data.length > 0) {
-                    props.setRawLocations(res.data)
+                    const mockCapacity = res.data.map(location => ({...location, capacity: Math.floor(Math.random() * 100)}));
+                    props.setRawLocations(mockCapacity);
                 }
             }
         }

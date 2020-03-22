@@ -6,6 +6,7 @@ import TableRow from "@material-ui/core/TableRow";
 import {headCells, RandomProgressBar} from "../containers/Dashboard";
 import CardMedia from "@material-ui/core/CardMedia";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const hideCells = ["type", "freeBeds", "numberOfBeds"];
 
@@ -50,7 +51,11 @@ export const HospitalDetail = ({location}) => {
                     </TableRow>))}
                     <TableRow>
                         <TableCell>Auslastung</TableCell>
-                        <TableCell><div className={classes.progress}><RandomProgressBar/></div></TableCell>
+                        <TableCell><div className={classes.progress}>
+                            <LinearProgress
+                                variant="determinate"
+                                value={location.capacity}></LinearProgress>
+                            </div></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

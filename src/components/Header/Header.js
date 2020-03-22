@@ -19,7 +19,12 @@ const styles = theme => ({
   },
   title: {
     marginLeft: 12,
-    flexGrow: 1
+  },
+  logo: {
+    flexGrow: 1,
+  },
+  logoImg: {
+    width: 85,
   }
 });
 
@@ -37,13 +42,16 @@ const Header = props => {
         {/*  <MenuIcon />*/}
         {/*</IconButton>*/}
         <Typography
-          variant="h4"
-          color="inherit"
-          noWrap
-          className={classes.title}
+            variant="h4"
+            color="inherit"
+            noWrap
+            className={classes.title}
         >
           KapaMonitor
         </Typography>
+        <div className={classes.logo}>
+          <img src="/kapa_hands.png" className={classes.logoImg}/>
+        </div>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />
