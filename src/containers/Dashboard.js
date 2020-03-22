@@ -29,7 +29,7 @@ const headCells = [
     {id: "postCode", label: "PLZ", numberic: true},
     {id: "city", label: "Stadt", numberic: false},
     {id: "numberOfBeds", label: "Anzahl Betten", numberic: true},
-    {id: "freeBeds", label: "Verfügbare Betten", numberic: true},
+    {id: "freeBeds", label: "Auslastung", numberic: true},
 ];
 
 const calcCapacity = row => (1 - row.freeBeds / row.numberOfBeds); // 0=all beds free, 1=all beds full
@@ -68,7 +68,7 @@ const getNumberOfBedsForType = (row) => {
             break;
     }
 }
-
+const randomFreeBeds = row => Math.floor(getNumberOfBedsForType(row) * Math.random())
 const getCellContent = (row, cellId) => {
     switch (cellId) {
         case "street":
@@ -81,7 +81,9 @@ const getCellContent = (row, cellId) => {
             return getNumberOfBedsForType(row);
             break;
         case "freeBeds":
-            return Math.floor(getNumberOfBedsForType(row) * Math.random());
+            return (<LinearProgress
+                variant="determinate"
+                value={calcCapacity({...row, freeBeds: randomFreeBeds(row)}) * 100}></LinearProgress>);
         default:
             return row[cellId];
     }
@@ -119,21 +121,14 @@ const Dashboard = props => {
                         {headCells.map(cell => (
                             <TableCell><strong>{cell.label}</strong></TableCell>
                         ))}
-                        <TableCell><strong>Auslastung</strong></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => (
                         <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true}>
                             {headCells.map(cell => (
-                                <TableCell>{getCellContent(row,  cell.id)}</TableCell>
+                                <TableCell>{getCellContent(row, cell.id)}</TableCell>
                             ))}
-                            <TableCell>
-                                {row.type !== "unknown" && <LinearProgress
-                                    variant="determinate"
-                                    color={capacityColor(calcCapacity(row))}
-                                    value={calcCapacity(row) * 100}></LinearProgress>}
-                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -148,10 +143,7 @@ const Dashboard = props => {
             <PopupContent rows={rows} index={selectedRow}/>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
-                    Disagree
-                </Button>
-                <Button onClick={handleClose} color="primary">
-                    Agree
+                    Ok
                 </Button>
             </DialogActions>
         </Dialog>
