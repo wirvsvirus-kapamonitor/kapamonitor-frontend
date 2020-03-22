@@ -33,6 +33,9 @@ const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
+    tableRow: {
+        cursor: "pointer",
+    }
 });
 
 const getIconForType = type => {
@@ -112,7 +115,7 @@ const Dashboard = props => {
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => (
-                        <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true}>
+                        <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true} className={classes.tableRow}>
                             {headCells.map(cell => (
                                 <TableCell>{getCellContent(row, cell.id)}</TableCell>
                             ))}
