@@ -11,6 +11,7 @@ import EmptyLayout from './layouts/EmptyLayout';
 import Register from './containers/Register/Register';
 import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
+import UserNotice from './components/UserNotice/UserNotice';
 
 
 const NotFound = () => {
@@ -44,6 +45,8 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
+
+
     render() {
         // const { settings } = this.props;
 
@@ -62,6 +65,7 @@ class App extends Component {
                         </Switch>
                     </Router>
                 </div>
+                <UserNotice/>
             </MuiThemeProvider>
         );
     }
@@ -69,8 +73,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-
-    settings: state.settings,
+    userNoticeConfirmed: state.userNoticeConfirmed
 
 })
 
