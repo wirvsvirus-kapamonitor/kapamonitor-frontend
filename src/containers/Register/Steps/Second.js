@@ -108,18 +108,18 @@ function Second(props) {
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textField}
-                        value={state.street}
+                        value={props.street}
                         name={'street'}
-                        onChange={handleChange('street')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="outlined-basic"
                         label="Straße"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
                         className={classes.textFieldSmall}
-                        value={state.number}
+                        value={props.number}
                         name={'number'}
-                        onChange={handleChange('number')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="outlined-basic"
                         label="Hausnummer"
                         variant="outlined"/>
@@ -127,18 +127,18 @@ function Second(props) {
                 <div className={classes.besideWrapper}>
                     <TextField
                         className={classes.textFieldSmall}
-                        value={state.postalCode}
+                        value={props.postalCode}
                         name={'postalCode'}
-                        onChange={handleChange('postalCode')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="outlined-basic"
                         label="Postleitzahl"
                         variant="outlined"/>
                     <div className={classes.space}/>
                     <TextField
                         className={classes.textField}
-                        value={state.city}
+                        value={props.city}
                         name={'city'}
-                        onChange={handleChange('city')}
+                        onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                         id="outlined-basic"
                         label="Stadt"
                         variant="outlined"/>
@@ -147,8 +147,8 @@ function Second(props) {
                     className={classes.checkBox}
                     control={
                         <Checkbox
-                            checked={internet}
-                            onChange={handleChangeInternet}
+                            checked={props.internet}
+                            onChange={event => props.setFormAttribute(event.target.name, event.target.value)}
                             name="checkedB"
                             color="primary"
                             label="Indeterminate"
@@ -164,9 +164,11 @@ function Second(props) {
 
 const mapStateToProps = state => ({
 
-    firstName: state.registerUnit.firstName,
-    lastName: state.registerUnit.lastName,
-    email: state.registerUnit.email
+    street: state.registerUnit.street,
+    number: state.registerUnit.number,
+    postalCode: state.registerUnit.postalCode,
+    city: state.registerUnit.city,
+    internet: state.registerUnit.internet,
 
 })
 
