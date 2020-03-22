@@ -63,6 +63,7 @@ class App extends Component {
             </MuiThemeProvider>
         );
     }
+
 }
 
 const mapStateToProps = state => {
