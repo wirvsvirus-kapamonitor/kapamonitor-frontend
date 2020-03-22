@@ -4,12 +4,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
-import Home from './containers/Home';
 import Setting from './containers/Setting';
 
 import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
 import Register from './containers/Register/Register';
+import Dashboard from "./containers/Dashboard";
+
 
 const NotFound = () => {
     return <div>NotFound</div>;
@@ -51,10 +52,10 @@ class App extends Component {
                 <div style={{ height: '100vh' }}>
                     <Router>
                         <Switch>
-                            <DashboardRoute path="/dashboard" component={Home}/>
+                            <DashboardRoute path="/dashboard" component={Dashboard}/>
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
-                            <DashboardRoute exact path="/" component={Home}/>
+                            <DashboardRoute exact path="/" component={Dashboard}/>
                             <EmptyRoute component={NotFound}/>
                         </Switch>
                     </Router>
