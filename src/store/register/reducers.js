@@ -14,8 +14,9 @@ const initState = {
     hasInternet: false,
 
 
-    activeStep: 0
+    activeStep: 0,
 
+    nav:"dashboard"
 };
 
 export default function registerUnitReducer(state = initState, action) {
@@ -30,6 +31,11 @@ export default function registerUnitReducer(state = initState, action) {
             return {
                 ...state,
                 activeStep: action.step
+            };
+        case types.SET_NAVIGATION:
+            return {
+                ...state,
+                nav: action.nav
             };
         default:
             return state;

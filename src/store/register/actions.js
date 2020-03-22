@@ -11,3 +11,7 @@ export const setActiveStep = (step) => ({
   type: types.SET_ACTIVE_STEP,
   step
 });
+export const setNavigation = (nav) => ({
+  type: types.SET_NAVIGATION,
+  nav
+});
