@@ -61,7 +61,7 @@ function Leaflet(props) {
             const res = await getAllLocations();
             const arr = []
 
-            console.log(arr)
+
 
             if (res.status === 200) {
                 if(res.data.length > 0){
@@ -77,7 +77,7 @@ function Leaflet(props) {
                     props.setLocations(arr)
                 }
             }
-
+            console.log(arr)
 
             console.log("res",res.status)
 
@@ -85,6 +85,7 @@ function Leaflet(props) {
         }
 
         fetchRows();
+
     }, []);
 
     return (

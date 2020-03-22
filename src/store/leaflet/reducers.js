@@ -24,6 +24,8 @@ const initState = {
         }
     ],
 
+    rawLocations:[]
+
 
 };
 
@@ -34,7 +36,11 @@ export default function registerLeafletReducer(state = initState, action) {
                 ...state,
                 locations: action.locations
             };
-
+        case types.SET_RAW_LOCATIONS:
+            return {
+                ...state,
+                rawLocations: action.rawLocations
+            };
         default:
             return state;
     }
