@@ -139,13 +139,16 @@ const Dashboard = props => {
             fullWidth={true}
             maxWidth="md"
         >
-            <DialogTitle>{props.rawLocations[selectedRow] && props.rawLocations[selectedRow].title}</DialogTitle>
-            <HospitalDetail location={props.rawLocations[selectedRow]}></HospitalDetail>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Ok
-                </Button>
-            </DialogActions>
+            {props.rawLocations ?
+                <>
+                    <DialogTitle>{props.rawLocations[selectedRow] && props.rawLocations[selectedRow].title}</DialogTitle>
+                    <HospitalDetail location={props.rawLocations[selectedRow]}></HospitalDetail>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Ok
+                        </Button>
+                    </DialogActions></> : null}
+
         </Dialog>
     </PaddingLayout>)
 };
