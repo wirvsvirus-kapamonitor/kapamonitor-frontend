@@ -6,3 +6,9 @@ export const setLocations = (locations) => ({
   locations,
 });
 
+
+export const setRawLocations = (rawLocations) => ({
+  type: types.SET_RAW_LOCATIONS,
+  rawLocations,
+});
+

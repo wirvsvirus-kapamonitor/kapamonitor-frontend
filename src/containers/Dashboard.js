@@ -17,7 +17,8 @@ import HotelIcon from '@material-ui/icons/Hotel';
 import {getAllLocations} from "../services/backend-rest-service";
 import PaddingLayout from '../components/PaddingLayout';
 import {HospitalDetail} from "../components/HospitalDetail";
-
+import { setRawLocations } from '../store/leaflet/actions';
+import { connect } from 'react-redux';
 
 export const headCells = [
     {id: "type", label: "Typ", numberic: false},
@@ -92,6 +93,12 @@ const Dashboard = props => {
         async function fetchRows() {
             const res = await getAllLocations();
             setRows(res.data);
+
+            if (res.status === 200) {
+                if (res.data.length > 0) {
+                    props.setRawLocations(res.data)
+                }
+            }
         }
         fetchRows();
     }, []);
@@ -114,7 +121,7 @@ const Dashboard = props => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
+                    {props.rawLocations.map((row, index) => (
                         <TableRow key={row.id} onClick={() => handleClickOpen(index)} hover={true} className={classes.tableRow}>
                             {headCells.map(cell => (
                                 <TableCell>{getCellContent(row, cell.id)}</TableCell>
@@ -130,8 +137,8 @@ const Dashboard = props => {
             fullWidth={true}
             maxWidth="md"
         >
-            <DialogTitle>{rows[selectedRow] && rows[selectedRow].title}</DialogTitle>
-            <HospitalDetail location={rows[selectedRow]}></HospitalDetail>
+            <DialogTitle>{props.rawLocations[selectedRow] && props.rawLocations[selectedRow].title}</DialogTitle>
+            <HospitalDetail location={props.rawLocations[selectedRow]}></HospitalDetail>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Ok
@@ -141,4 +148,14 @@ const Dashboard = props => {
     </PaddingLayout>)
 };
 
-export default Dashboard;
+
+const mapStateToProps = state => ({
+    rawLocations: state.leaflet.rawLocations,
+})
+
+const mapDispatchToProps = {
+    setRawLocations
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
