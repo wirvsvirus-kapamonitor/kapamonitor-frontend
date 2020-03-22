@@ -6,3 +6,8 @@ export const setFormAttribute = (target,value) => ({
   target,
   value,
 });
+
+export const setActiveStep = (step) => ({
+  type: types.SET_ACTIVE_STEP,
+  step
+});

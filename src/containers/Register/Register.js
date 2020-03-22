@@ -3,12 +3,13 @@ import Typography from '@material-ui/core/Typography';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { swapThemeColors, toggleThemeMode } from '../../store/reducers/settings';
+import { swapThemeColors, toggleThemeMode } from '../../store/settings/settings';
 import CustomizedStepper from './CustomizedStepper';
 import First from './Steps/First';
 import Second from './Steps/Second';
 import Third from './Steps/Third';
 import Done from './Steps/Done';
+import { setActiveStep } from '../../store/register/actions';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,9 +33,9 @@ const useStyles = makeStyles(theme => ({
 function Register(props) {
 
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(1);
+
     const handleStepChange = (step) => {
-        setActiveStep(step);
+        props.setActiveStep(step);
     };
 
     return (
@@ -52,10 +53,10 @@ function Register(props) {
             <CustomizedStepper handleStepChange={handleStepChange}/>
 
             <div className={classes.wrapper}>
-                {activeStep === 0 ? <First/> : null}
-                {activeStep === 1 ? <Second/> : null}
-                {activeStep === 2 ? <Third/> : null}
-                {activeStep === 3 ? <Done/> : null}
+                {props.activeStep === 0 ? <First/> : null}
+                {props.activeStep === 1 ? <Second/> : null}
+                {props.activeStep === 2 ? <Third/> : null}
+                {props.activeStep === 3 ? <Done/> : null}
             </div>
 
 
@@ -63,20 +64,16 @@ function Register(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        settings: state.settings
-    };
-};
+const mapStateToProps = state => ({
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            toggleThemeMode: checked => toggleThemeMode(checked),
-            swapThemeColors: checked => swapThemeColors(checked)
-        },
-        dispatch
-    );
+    activeStep: state.registerUnit.activeStep,
+
+
+})
+
+const mapDispatchToProps = {
+    setActiveStep
+
 };
 
 export default connect(
