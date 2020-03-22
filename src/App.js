@@ -9,8 +9,9 @@ import Setting from './containers/Setting';
 import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
 import Register from './containers/Register/Register';
-import Dashboard from "./containers/Dashboard";
-import Leaflet from "./containers/Leaflet/Leaflet";
+import Dashboard from './containers/Dashboard';
+import Leaflet from './containers/Leaflet/Leaflet';
+import UserNotice from './components/UserNotice/UserNotice';
 
 
 const NotFound = () => {
@@ -44,8 +45,10 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
+
+
     render() {
-        const { settings } = this.props;
+        // const { settings } = this.props;
 
         return (
             <MuiThemeProvider>
@@ -62,17 +65,17 @@ class App extends Component {
                         </Switch>
                     </Router>
                 </div>
+                <UserNotice/>
             </MuiThemeProvider>
         );
     }
 
 }
 
-const mapStateToProps = state => {
-    return {
-        settings: state.settings,
-    };
-};
+const mapStateToProps = state => ({
+    userNoticeConfirmed: state.userNoticeConfirmed
+
+})
 
 export default connect(
     mapStateToProps,
