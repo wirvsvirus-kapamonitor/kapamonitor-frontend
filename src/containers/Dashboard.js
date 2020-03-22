@@ -32,15 +32,6 @@ const headCells = [
     {id: "freeBeds", label: "Auslastung", numberic: true},
 ];
 
-const calcCapacity = row => (1 - row.freeBeds / row.numberOfBeds); // 0=all beds free, 1=all beds full
-
-const capacityColor = capacity => {
-    // TODO: the progress indicator only knows primary/secondary as colors. Need to write custom css for capacity states
-    if (capacity <= 0.1) return "secondary"; // critical capactiy (red)
-    if (capacity <= 0.5) return "secondary"; // medium capacity (yellow)
-    return "primary"
-};
-
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -68,7 +59,6 @@ const getNumberOfBedsForType = (row) => {
             break;
     }
 }
-const randomFreeBeds = row => Math.floor(getNumberOfBedsForType(row) * Math.random())
 const getCellContent = (row, cellId) => {
     switch (cellId) {
         case "street":
@@ -83,7 +73,7 @@ const getCellContent = (row, cellId) => {
         case "freeBeds":
             return (<LinearProgress
                 variant="determinate"
-                value={calcCapacity({...row, freeBeds: randomFreeBeds(row)}) * 100}></LinearProgress>);
+                value={Math.floor(Math.random() * 100)}></LinearProgress>);
         default:
             return row[cellId];
     }
