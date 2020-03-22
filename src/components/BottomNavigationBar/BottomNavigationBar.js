@@ -2,6 +2,7 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import MapIcon from '@material-ui/icons/Map';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CreateIcon from '@material-ui/icons/Create';
 import { withStyles } from '@material-ui/core/styles';
@@ -49,6 +50,9 @@ const BottomNavigationBar = props => {
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
             <Link to="/dashboard">
                 <BottomNavigationAction label="Dashboard" value="dashboard" icon={<DashboardIcon/>}/>
+            </Link>
+            <Link to="/map">
+                <BottomNavigationAction label="Map" value="map" icon={<MapIcon/>}/>
             </Link>
             <Link to="/register"><BottomNavigationAction label="Register" value="register" icon={<CreateIcon/>}/></Link>
             <Link to={"setting"}><BottomNavigationAction label="Profile" value="profile" icon={<SettingsIcon/>}/></Link>
