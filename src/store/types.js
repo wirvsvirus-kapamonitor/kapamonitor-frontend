@@ -6,6 +6,8 @@ const types = {
   SET_LOCATIONS: 'SET_LOCATIONS',
   SET_RAW_LOCATIONS: 'SET_RAW_LOCATIONS',
 
+  SET_CONFIRM: 'SET_CONFIRM',
+
 };
 
 export default types;
