@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { swapThemeColors, toggleThemeMode } from '../../../store/reducers/settings';
-import { setLastname,setFirstname,setEmail } from '../../../store/reducers/registerUnit';
+import { setFormAttribute} from '../../../store/register/actions';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 
@@ -43,24 +41,6 @@ const useStyles = makeStyles(theme => ({
 
 function First(props) {
     const classes = useStyles();
-    const [state, setState] = useState({
-        lastName: '',
-        firstName: '',
-        email: '',
-        phone: '',
-        address: '',
-    })
-
-    const handleChange = prop => event => {
-
-        setState({
-            [prop]: event.target.value,
-        })
-
-
-        console.log(event.target, prop)
-    }
-
 
     return (
         <div className={classes.root}>
@@ -70,9 +50,9 @@ function First(props) {
                     <TextField
                         className={classes.textField}
                         value={props.lastName}
-                        name={'firstName'}
-                        onChange={event => props.setLastname(event.target.value)}
-                        id="outlined-basic"
+                        name={'lastName'}
+                        onChange={event => props.setLastname(event.target.name, event.target.value)}
+                        id="ln-input"
                         label="Nachname"
                         variant="outlined"/>
                     <div className={classes.space}/>
@@ -80,24 +60,24 @@ function First(props) {
                         className={classes.textField}
                         value={props.firstName}
                         name={'firstName'}
-                        onChange={event => props.setFirstname(event.target.value)}
-                        id="outlined-basic"
+                        onChange={event => props.setLastname(event.target.name, event.target.value)}
+                        id="fn-input"
                         label="Vorname"
                         variant="outlined"/>
                 </div>
 
                 <TextField className={classes.textField}
                            value={props.email}
-                           name={'firstName'}
-                           onChange={event => props.setEmail(event.target.value)}
-                           id="outlined-basic"
+                           name={'email'}
+                           onChange={event => props.setLastname(event.target.name, event.target.value)}
+                           id="email-intpu"
                            label="Email"
                            variant="outlined"/>
                 <TextField className={classes.textField}
-                           value={state.phone}
+                           value={props.phone}
                            name={'phone'}
-                           onChange={handleChange('phone')}
-                           id="outlined-basic"
+                           onChange={event => props.setLastname(event.target.name, event.target.value)}
+                           id="phone-input"
                            label="Telefonnummer"
                            variant="outlined"/>
 
@@ -106,28 +86,18 @@ function First(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        firstName: state.registerUnit.firstName,
-        lastName: state.registerUnit.lastName,
-        email: state.registerUnit.email,
-    };
+const mapStateToProps = state => ({
+
+    firstName: state.registerUnit.firstName,
+    lastName: state.registerUnit.lastName,
+    email: state.registerUnit.email,
+    phone: state.registerUnit.phone
+
+})
+
+const mapDispatchToProps = {
+    setFormAttribute
+
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            setLastname: value => setLastname(value),
-            setFirstname: value => setFirstname(value),
-            setEmail: value => setEmail(value),
-            toggleThemeMode: checked => toggleThemeMode(checked),
-            swapThemeColors: checked => swapThemeColors(checked)
-        },
-        dispatch
-    );
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(First);
+export default connect(mapStateToProps, mapDispatchToProps)(First);

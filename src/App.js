@@ -47,7 +47,7 @@ class App extends Component {
         const { settings } = this.props;
 
         return (
-            <MuiThemeProvider theme={settings.theme}>
+            <MuiThemeProvider>
                 <CssBaseline/>
                 <div style={{ height: '100vh' }}>
                     <Router>

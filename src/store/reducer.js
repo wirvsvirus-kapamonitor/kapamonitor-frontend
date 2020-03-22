@@ -1,6 +1,6 @@
-import stepCounter from "./stepCounter";
-import registerUnit from "./registerUnit";
-import settings from "./settings";
+import stepCounter from "./reducers/stepCounter";
+import registerUnit from "./register/reducers";
+import settings from "./reducers/settings";
 import { combineReducers } from "redux";
 
 const reducers = combineReducers({
