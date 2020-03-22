@@ -1,53 +1,50 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
-import Home from "./containers/Home";
-import Setting from "./containers/Setting";
+import Setting from './containers/Setting';
 
-import MainLayout from "./layouts/MainLayout";
-import EmptyLayout from "./layouts/EmptyLayout";
-import Register from './containers/Register';
+import MainLayout from './layouts/MainLayout';
+import EmptyLayout from './layouts/EmptyLayout';
+import Register from './containers/Register/Register';
+import Dashboard from "./containers/Dashboard";
+
 
 const NotFound = () => {
-  return <div>NotFound</div>;
+    return <div>NotFound</div>;
 };
 
 const DashboardRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={matchProps => (
-        <MainLayout>
-          <Component {...matchProps} />
-        </MainLayout>
-      )}
-    />
-  );
+    return (
+        <Route
+            {...rest}
+            render={matchProps => (
+                <MainLayout>
+                    <Component {...matchProps} />
+                </MainLayout>
+            )}
+        />
+    );
 };
 
 const EmptyRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={matchProps => (
-        <EmptyLayout>
-          <Component {...matchProps} />
-        </EmptyLayout>
-      )}
-    />
-  );
+    return (
+        <Route
+            {...rest}
+            render={matchProps => (
+                <EmptyLayout>
+                    <Component {...matchProps} />
+                </EmptyLayout>
+            )}
+        />
+    );
 };
 
 class App extends Component {
-  render() {
-    const { settings } = this.props;
+    render() {
+        const { settings } = this.props;
 
     return (
       <MuiThemeProvider theme={settings.theme}>
@@ -55,11 +52,11 @@ class App extends Component {
         <div style={{ height: "100vh" }}>
           <Router>
             <Switch>
-              <DashboardRoute path="/dashboard" component={Home} />
-              <DashboardRoute path="/register" component={Register} />
-              <DashboardRoute path="/setting" component={Setting} />
-              <DashboardRoute exact path="/" component={Home} />
-              <EmptyRoute component={NotFound} />
+              <DashboardRoute path="/dashboard" component={Dashboard}/>
+              <DashboardRoute path="/register" component={Register}/>
+              <DashboardRoute path="/setting" component={Setting}/>
+              <DashboardRoute exact path="/" component={Dashboard}/>
+              <EmptyRoute component={NotFound}/>
             </Switch>
           </Router>
         </div>
@@ -69,12 +66,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    settings: state.settings,
-  };
+    return {
+        settings: state.settings,
+    };
 };
 
 export default connect(
-  mapStateToProps,
-  null
+    mapStateToProps,
+    null
 )(App);
