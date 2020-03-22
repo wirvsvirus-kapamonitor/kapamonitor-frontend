@@ -267,7 +267,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     setActiveStep
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomizedStepper);
