@@ -14,6 +14,8 @@ import { setActiveStep } from '../../store/register/actions';
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+        marginTop: theme.spacing.unit * 7,
     },
     paper: {
         padding: theme.spacing(2),

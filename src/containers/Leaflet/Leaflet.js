@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import MarkerCluster from './MarkerCluster';
 import { makeStyles } from '@material-ui/core/styles';
+import 'leaflet/dist/leaflet.css';
 
 const position = [52.520, 13.404];
-const mapStyle = { height: '90vh' };
+const mapStyle = { height: '90vh', zIndex: 1 };
 
 var myCustomArray = [
     {
@@ -30,8 +31,10 @@ var myCustomArray = [
 ];
 const useStyles = makeStyles(theme => ({
     root: {
+        flexGrow: 1,
         margin: 0,
-        padding: 0
+        padding: 0,
+        marginTop: theme.spacing.unit * 7
     },
     paper: {
         padding: theme.spacing(2),

@@ -20,6 +20,7 @@ import Grid from "@material-ui/core/Grid";
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import HotelIcon from '@material-ui/icons/Hotel';
 import {getAllLocations} from "../services/backend-rest-service";
+import PaddingLayout from '../components/PaddingLayout';
 
 
 const headCells = [
@@ -103,7 +104,7 @@ const Dashboard = props => {
     const handleClose = () => {
         setOpen(false);
     };
-    return (<div>
+    return (<PaddingLayout>
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
@@ -137,7 +138,7 @@ const Dashboard = props => {
                 </Button>
             </DialogActions>
         </Dialog>
-    </div>)
+    </PaddingLayout>)
 };
 
 const PopupContent = props => {
