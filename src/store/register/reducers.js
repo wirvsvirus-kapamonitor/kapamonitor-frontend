@@ -57,6 +57,16 @@ export default function registerUnitReducer(state = initState, action) {
                 postalCode: '',
                 city: '',
                 hasInternet: false,
+
+                bedsWithDevicesCarpet: '',
+                bedsWithoutDevicesCarpet: '',
+
+                bedsWithDevices: '',
+                bedsWithoutDevices: '',
+
+                washbasins: '',
+                showers: '',
+                toilets: '',
             };
         case types.SET_NAVIGATION:
             return {
