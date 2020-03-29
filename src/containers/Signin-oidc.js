@@ -10,7 +10,7 @@ import PaddingLayout from '../components/PaddingLayout';
 
 
 var OidcSettings = {
-  
+
 };
 
 class SigninOidc extends Component {
