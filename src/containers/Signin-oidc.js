@@ -16,31 +16,15 @@ var OidcSettings = {
 class SigninOidc extends Component {
     constructor(props) {
         super(props);
-        this.userLoaded = this.userLoaded.bind(this);
-        this.userUnLoaded = this.userUnLoaded.bind(this);
 
-        this.state = { user: undefined };
+
     }
 
-    userLoaded(user) {
-        if (user)
-            this.setState({ "user": user });
-    }
 
-    userUnLoaded() {
-        this.setState({ "user": undefined });
-    }
-
-    NotAuthenticated() {
-        return <div>You are not authenticated, please click here to authenticate.</div>;
-    }
     render() {
         return (
             <PaddingLayout>
-                <Typography variant="headline">Login</Typography>
-                <Authenticate OidcSettings={OidcSettings} userLoaded={this.userLoaded} userunLoaded={this.userUnLoaded} renderNotAuthenticated={this.NotAuthenticated}>
-                    <div>If you see this you are authenticated.</div>
-                </Authenticate>
+                <Typography variant="headline">SignIn</Typography>
             </PaddingLayout>
         );
     }
