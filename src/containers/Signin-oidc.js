@@ -4,14 +4,11 @@ import Typography from '@material-ui/core/Typography';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Authenticate from 'react-openidconnect';
 import { swapThemeColors, toggleThemeMode } from '../store/settings/settings';
 import PaddingLayout from '../components/PaddingLayout';
 
 
-var OidcSettings = {
-
-};
+var OidcSettings = {};
 
 class SigninOidc extends Component {
     constructor(props) {
@@ -20,11 +17,20 @@ class SigninOidc extends Component {
 
     }
 
+    componentDidMount() {
+
+    }
+
+
+    onButtonClick = () => {
+        console.log('hey')
+    }
 
     render() {
         return (
             <PaddingLayout>
                 <Typography variant="headline">SignIn</Typography>
+                <button onClick={this.onButtonClick}>Click!</button>
             </PaddingLayout>
         );
     }
