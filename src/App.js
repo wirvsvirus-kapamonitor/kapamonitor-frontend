@@ -1,33 +1,29 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-
-import Setting from './containers/Setting';
 
 import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
-import Register from './containers/Register/Register';
+
+import * as firebase from 'firebase';
+import firebaseConfig from './firebaseConfig';
+import { setUser } from './store/user/actions';
+import LoginPage from './containers/LoginPage';
+import SignUpPage from './containers/SignUpPage';
+
 import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
-import UserNotice from './components/UserNotice/UserNotice';
-import Login from './containers/Signin-oidc';
-// import * as firebase from 'firebase';
-// import 'firebase/auth';
-// import firebaseConfig from './firebaseConfig';
-//
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
-// const firebaseAppAuth = firebaseApp.auth();
-//
-// var provider = new firebase.auth.GoogleAuthProvider();
+import Setting from './containers/Setting';
+import Register from './containers/Register/Register';
+
+firebase.initializeApp(firebaseConfig);
 
 const NotFound = () => {
     return <div>NotFound</div>;
 };
 
-
-const DashboardRoute = ({ component: Componeynt, ...rest }) => {
+const DashboardRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -55,27 +51,61 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 
 class App extends Component {
 
-    render() {
+    constructor(props) {
+        super(props);
+    }
 
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user)=> {
+          this.props.setUser(user)
+        });
+    }
+
+    render() {
         // const { settings } = this.props;
+
         return (
-            <MuiThemeProvider>
+
+            <>
                 <CssBaseline/>
-                <div style={{ height: '100vh' }}>
-                    <Router>
-                        <Switch>
-                            <DashboardRoute path="/dashboard" component={Dashboard}/>
-                            <DashboardRoute path="/map" component={Leaflet}/>
-                            <DashboardRoute path="/signin-oidc" component={Login}/>
-                            <DashboardRoute path="/register" component={Register}/>
-                            <DashboardRoute path="/setting" component={Setting}/>
-                            <DashboardRoute exact path="/" component={Dashboard}/>
-                            <EmptyRoute component={NotFound}/>
-                        </Switch>
-                    </Router>
-                </div>
-                <UserNotice/>
-            </MuiThemeProvider>
+                {this.props.user ?
+                    // <LoginPage/>
+
+                       <MuiThemeProvider>
+                                <CssBaseline/>
+                                <div style={{ height: '100vh' }}>
+                                    <Router>
+                                        <Switch>
+                                            <DashboardRoute path="/dashboard" component={Dashboard}/>
+                                            <DashboardRoute path="/map" component={Leaflet}/>
+
+                                            <DashboardRoute path="/register" component={Register}/>
+                                            <DashboardRoute path="/setting" component={Setting}/>
+                                            <DashboardRoute exact path="/" component={Dashboard}/>
+                                            <EmptyRoute component={NotFound}/>
+                                        </Switch>
+                                    </Router>
+                                </div>
+                                <UserNotice/>
+                            </MuiThemeProvider>:
+                    <div style={{ height: '100vh' }}>
+
+                        <Router>
+                            <Switch>
+                                <Route path="/login" component={LoginPage}/>
+                                <Route path="/sign-up" component={SignUpPage}/>
+                                <Route exact path="/" component={LoginPage}/>
+                                <EmptyRoute component={NotFound}/>
+                            </Switch>
+                        </Router>
+                    </div>
+                }
+
+
+
+
+            </>
+
 
         );
     }
@@ -83,19 +113,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    userNoticeConfirmed: state.userNoticeConfirmed
+    user: state.user
 
 })
-
-
+const mapDispatchToProps = {
+    setUser
+};
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(App);
-// export default withFirebaseAuth({
-//     providers,
-//     firebaseAppAuth,
-// })(connect(
-//     mapStateToProps,
-//     null
-// )(App));

@@ -15,7 +15,7 @@
     "classnames": "^2.2.6",
     "clsx": "latest",
     "firebase": "^7.13.1",
-    "firebaseui": "^4.5.0",
+
     "leaflet": "1.6.0",
     "leaflet.markercluster": "1.4.1",
     "react": "latest",
