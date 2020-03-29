@@ -4,21 +4,24 @@ import Typography from '@material-ui/core/Typography';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import Authenticate from 'react-openidconnect';
 import { swapThemeColors, toggleThemeMode } from '../store/settings/settings';
 import PaddingLayout from '../components/PaddingLayout';
 
 
 var OidcSettings = {
-    authority: 'https://****/identity',
-    client_id: 'myclientid',
-    redirect_uri: 'https://localhost:9090/',
-    response_type: 'id_token token',
-    scope: 'openid profile roles',
-    post_logout_redirect_uri: 'https://localhost:9090/'
+    authority: "https://kapamonitordev.b2clogin.com/kapamonitordev.onmicrosoft.com/B2C_1_susi",
+    client_id: "1a779c89-f148-4322-991b-bc94c99ddd88",
+    redirect_uri: "http://localhost:3000/signin-oidc",
+    post_logout_redirect_uri: 'http://localhost:3000/',
+    response_type: "id_token token",
+  
+    scope: "https://kapamonitordev.onmicrosoft.com/devapi/user_impersonation",
+    filterProtocolClaims: true,
+    loadUserInfo: true
 };
 
-class Login extends Component {
+class SigninOidc extends Component {
     constructor(props) {
         super(props);
         this.userLoaded = this.userLoaded.bind(this);
@@ -69,4 +72,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(SigninOidc);

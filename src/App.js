@@ -12,7 +12,7 @@ import Register from './containers/Register/Register';
 import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
 import UserNotice from './components/UserNotice/UserNotice';
-import Login from './containers/Login';
+import Login from './containers/Signin-oidc';
 
 
 const NotFound = () => {
@@ -59,7 +59,7 @@ class App extends Component {
                         <Switch>
                             <DashboardRoute path="/dashboard" component={Dashboard}/>
                             <DashboardRoute path="/map" component={Leaflet}/>
-                            <DashboardRoute path="/login" component={Login}/>
+                            <DashboardRoute path="/signin-oidc" component={Login}/>
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
                             <DashboardRoute exact path="/" component={Dashboard}/>
