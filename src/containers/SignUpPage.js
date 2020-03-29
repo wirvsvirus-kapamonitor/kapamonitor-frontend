@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -57,23 +55,15 @@ function SignUpPage(props) {
     const [loading, setLoading] = React.useState(false)
 
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submit!', email, pw)
 
-            firebase.auth().createUserWithEmailAndPassword(email, pw).then(res => {
-                console.log(res)
-                if(res){
-                    props.setUser(res)
-                    history.push("/")
-                } else {
-                    props.setUser(null)
-                }
-            })
+        firebase.auth().createUserWithEmailAndPassword(email, pw).then(res => {
+            console.log(res)
 
+        }).catch(e => {
 
-
+        })
     }
 
     return (
@@ -139,13 +129,21 @@ function SignUpPage(props) {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary"/>}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
+                            <Typography> Die hier präsentierten Daten sind als Demonstrationsdaten zu verstehen und
+                                stellen keine Abbildung der Realität dar,
+                                sollen keine Auskunft über die Realität geben und haben in keiner Form Bezug zu den
+                                genannten Personen und Einrichtungen. Jegliche Ähnlichkeit ist zufällig und
+                                unbeabsichtigt.
+                                Weiterhin werden keine Personenbezogenen Daten verarbeitet oder gespeichert und die hier
+                                zur Verfügung gestellten Masken sind ausschließlich als Demonstrationsmuster zu
+                                verstehen.
+                                Ich habe die oben dargelegten Informationen und Sachverhalte verstanden und stimme
+                                diesen durch meine Nutzung zu.
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Button
+
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -158,7 +156,7 @@ function SignUpPage(props) {
                     <Grid container justify="flex-end">
                         <Grid item>
                             {/*<LinkMat variant="body2">*/}
-                            <Link to="/login">Already have an account? Sign in</Link>
+                            <Link to="/login">Account schon vorhanden? Login</Link>
                             {/*</LinkMat>*/}
                         </Grid>
                     </Grid>

@@ -19,10 +19,10 @@ import { connect } from 'react-redux';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
+            {'Copyright ©    Kapamonitor  '}
+
+
+
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -98,7 +98,7 @@ function LoginPage(props) {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email Adresse"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -110,16 +110,16 @@ function LoginPage(props) {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Passwort"
                             type="password"
                             id="password"
                             onChange={e => setPw(e.target.value)}
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
+                        {/*<FormControlLabel*/}
+                        {/*    control={<Checkbox value="remember" color="primary"/>}*/}
+                        {/*    label="Remember me"*/}
+                        {/*/>*/}
                         <Button
                             type="submit"
                             fullWidth
@@ -133,13 +133,13 @@ function LoginPage(props) {
                         <Grid container>
                             <Grid item xs>
                                 <LinkMat variant="body2">
-                                    <Link to="/sign-up"> Forgot password?</Link>
+                                    <Link to="/sign-up"> Passwort vergessen?</Link>
                                 </LinkMat>
                             </Grid>
                             <Grid item>
                                 <LinkMat variant="body2">
                                     <Link to="/sign-up">
-                                        {'Don\'t have an account? Sign Up'}
+                                        {'Noch kein Account? Sign Up'}
                                     </Link>
 
                                 </LinkMat>

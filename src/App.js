@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect,useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { connect } from 'react-redux';
@@ -50,13 +50,27 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
     );
 };
 
-
+function onAuthStateChange(callback) {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            callback({loggedIn: true});
+        } else {
+            callback({loggedIn: false});
+        }
+    });
+}
 function App(props) {
-
+    const [user, setUser] = useState( {loggedIn: false} );
+    useEffect(() => {
+        const unsubscribe = onAuthStateChange(setUser);
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     return (
         <>      {
-            props.user ? <MuiThemeProvider>
+            user.loggedIn ? <MuiThemeProvider>
                 <CssBaseline/>
                 <div style={{ height: '100vh' }}>
                     <Router>
@@ -66,7 +80,7 @@ function App(props) {
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
                             <DashboardRoute exact path="/" component={Dashboard}/>
-                            {/*<Route path="*" component={Dashboard}/>*/}
+                            <EmptyRoute component={NotFound}/>
                         </Switch>
                     </Router>
                 </div>
@@ -89,7 +103,7 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.user
+
 
 })
 const mapDispatchToProps = {
