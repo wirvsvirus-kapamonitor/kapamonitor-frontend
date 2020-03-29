@@ -13,14 +13,14 @@ import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
 import UserNotice from './components/UserNotice/UserNotice';
 import Login from './containers/Signin-oidc';
-import * as firebase from 'firebase';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const firebaseAppAuth = firebaseApp.auth();
-
-var provider = new firebase.auth.GoogleAuthProvider();
+// import * as firebase from 'firebase';
+// import 'firebase/auth';
+// import firebaseConfig from './firebaseConfig';
+//
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseAppAuth = firebaseApp.auth();
+//
+// var provider = new firebase.auth.GoogleAuthProvider();
 
 const NotFound = () => {
     return <div>NotFound</div>;
@@ -76,21 +76,7 @@ class App extends Component {
                 </div>
                 <UserNotice/>
             </MuiThemeProvider>
-            // <div className="App">
-            //     <header className="App-header">
-            //
-            //         {
-            //             user
-            //                 ? <p>Hello, {user.displayName}</p>
-            //                 : <p>Please sign in.</p>
-            //         }
-            //         {
-            //             user
-            //                 ? <button onClick={signOut}>Sign out</button>
-            //                 : <button onClick={signInWithGoogle}>Sign in with Google</button>
-            //         }
-            //     </header>
-            // </div>
+
         );
     }
 
@@ -102,9 +88,10 @@ const mapStateToProps = state => ({
 })
 
 
-export default (connect(
+export default connect(
     mapStateToProps,
-    null),(App))
+    null
+)(App);
 // export default withFirebaseAuth({
 //     providers,
 //     firebaseAppAuth,
