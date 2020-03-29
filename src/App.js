@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { connect } from 'react-redux';
-
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
 
@@ -16,11 +16,12 @@ import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
 import Setting from './containers/Setting';
 import Register from './containers/Register/Register';
+import UserNotice from './components/UserNotice/UserNotice';
 
 firebase.initializeApp(firebaseConfig);
 
 const NotFound = () => {
-    return <div>NotFound</div>;
+    return <Redirect path="/login" component={LoginPage}/>;
 };
 
 const DashboardRoute = ({ component: Component, ...rest }) => {
@@ -49,71 +50,46 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
     );
 };
 
-class App extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+function App(props) {
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged((user)=> {
-          this.props.setUser(user)
-        });
-    }
 
-    render() {
-        // const { settings } = this.props;
-
-        return (
-
-            <>
+    return (
+        <>      {
+            props.user ? <MuiThemeProvider>
                 <CssBaseline/>
-                {this.props.user ?
-                    // <LoginPage/>
+                <div style={{ height: '100vh' }}>
+                    <Router>
+                        <Switch>
+                            <DashboardRoute path="/dashboard" component={Dashboard}/>
+                            <DashboardRoute path="/map" component={Leaflet}/>
+                            <DashboardRoute path="/register" component={Register}/>
+                            <DashboardRoute path="/setting" component={Setting}/>
+                            <DashboardRoute exact path="/" component={Dashboard}/>
+                            {/*<Route path="*" component={Dashboard}/>*/}
+                        </Switch>
+                    </Router>
+                </div>
+                <UserNotice/>
+            </MuiThemeProvider> : <div style={{ height: '100vh' }}>
 
-                       <MuiThemeProvider>
-                                <CssBaseline/>
-                                <div style={{ height: '100vh' }}>
-                                    <Router>
-                                        <Switch>
-                                            <DashboardRoute path="/dashboard" component={Dashboard}/>
-                                            <DashboardRoute path="/map" component={Leaflet}/>
+                <Router>
+                    <Switch>
+                        <Route path="/login" component={LoginPage}/>
+                        <Route path="/sign-up" component={SignUpPage}/>
+                        <Route exact path="/" component={LoginPage}/>
+                        <EmptyRoute component={NotFound}/>
+                    </Switch>
+                </Router>
+            </div>
+        }</>
+    )
 
-                                            <DashboardRoute path="/register" component={Register}/>
-                                            <DashboardRoute path="/setting" component={Setting}/>
-                                            <DashboardRoute exact path="/" component={Dashboard}/>
-                                            <EmptyRoute component={NotFound}/>
-                                        </Switch>
-                                    </Router>
-                                </div>
-                                <UserNotice/>
-                            </MuiThemeProvider>:
-                    <div style={{ height: '100vh' }}>
-
-                        <Router>
-                            <Switch>
-                                <Route path="/login" component={LoginPage}/>
-                                <Route path="/sign-up" component={SignUpPage}/>
-                                <Route exact path="/" component={LoginPage}/>
-                                <EmptyRoute component={NotFound}/>
-                            </Switch>
-                        </Router>
-                    </div>
-                }
-
-
-
-
-            </>
-
-
-        );
-    }
 
 }
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user.user
 
 })
 const mapDispatchToProps = {

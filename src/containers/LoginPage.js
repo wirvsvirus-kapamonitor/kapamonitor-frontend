@@ -12,8 +12,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
-import {    Link} from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
+import * as firebase from 'firebase';
+import { setUser } from '../store/user/actions';
+import { connect } from 'react-redux';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -58,22 +60,33 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LoginPage() {
+function LoginPage(props) {
     const classes = useStyles();
     const history = useHistory();
+    const [email, setEmail] = React.useState('');
+    const [pw, setPw] = React.useState('');
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submit!', event)
+        console.log(email, pw)
+        firebase.auth().signInWithEmailAndPassword(email, pw).then(res=>{
+            console.log(res)
+            if(res){
+                props.setUser(res)
+            } else {
+                props.setUser(null)
+            }
+        })
 
     }
     return (
         <Grid container component="main" className={classes.root}>
-            <CssBaseline />
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
+            <CssBaseline/>
+            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
@@ -89,6 +102,7 @@ export default function LoginPage() {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={e => setEmail(e.target.value)}
                         />
                         <TextField
                             variant="outlined"
@@ -99,10 +113,11 @@ export default function LoginPage() {
                             label="Password"
                             type="password"
                             id="password"
+                            onChange={e => setPw(e.target.value)}
                             autoComplete="current-password"
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
+                            control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
                         />
                         <Button
@@ -117,21 +132,21 @@ export default function LoginPage() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <LinkMat  variant="body2">
+                                <LinkMat variant="body2">
                                     <Link to="/sign-up"> Forgot password?</Link>
                                 </LinkMat>
                             </Grid>
                             <Grid item>
                                 <LinkMat variant="body2">
                                     <Link to="/sign-up">
-                                    {"Don't have an account? Sign Up"}
+                                        {'Don\'t have an account? Sign Up'}
                                     </Link>
 
                                 </LinkMat>
                             </Grid>
                         </Grid>
                         <Box mt={5}>
-                            <Copyright />
+                            <Copyright/>
                         </Box>
                     </form>
                 </div>
@@ -139,3 +154,14 @@ export default function LoginPage() {
         </Grid>
     );
 }
+const mapStateToProps = state => ({
+    currentUser: state.user
+
+})
+const mapDispatchToProps = {
+    setUser
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginPage);

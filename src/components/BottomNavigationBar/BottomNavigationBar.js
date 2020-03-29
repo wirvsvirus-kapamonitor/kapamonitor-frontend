@@ -66,7 +66,7 @@ const BottomNavigationBar = props => {
             {/*</Link>*/}
             {/*<Link to="/register" onClick={()=>handleChange("register")}>*/}
             // <BottomNavigationAction label="Hinzufügen" value="register" icon={<CreateIcon/>}/>
-            <BottomNavigationAction label="Signin" value="signin-oidc" icon={<LoginIcon/>}/>
+            {/*<BottomNavigationAction label="Signin" value="signin-oidc" icon={<LoginIcon/>}/>*/}
             {/*</Link>*/}
             {/*<Link to={"setting"}><BottomNavigationAction label="Profile" value="profile" icon={<SettingsIcon/>}/></Link>*/}
 

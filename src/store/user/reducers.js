@@ -1,7 +1,7 @@
 import types from '../types';
 
 const initState = {
-    user:null
+    user: null
 };
 
 export default function registerUserReducer(state = initState, action) {

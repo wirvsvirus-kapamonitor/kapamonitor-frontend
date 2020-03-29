@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
 import { setUser } from '../store/user/actions';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as firebase from 'firebase';
 
 function Copyright() {
@@ -49,24 +49,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SignUpPage() {
+function SignUpPage(props) {
+    const history = useHistory();
     const classes = useStyles();
     const [email, setEmail] = React.useState('');
     const [pw, setPw] = React.useState('');
     const [loading, setLoading] = React.useState(false)
+
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('submit!', email, pw)
-        if (email.includes('@') && pw) {
-            firebase.auth().createUserWithEmailAndPassword(email, pw).then((res) => {
+
+            firebase.auth().createUserWithEmailAndPassword(email, pw).then(res => {
                 console.log(res)
-            }).catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-            });
-        }
+                if(res){
+                    props.setUser(res)
+                    history.push("/")
+                } else {
+                    props.setUser(null)
+                }
+            })
+
 
 
     }
