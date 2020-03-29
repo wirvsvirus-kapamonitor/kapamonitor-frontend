@@ -8,6 +8,7 @@ const persistConfig = {
     storage,
     blacklist: [
         // 'registerUnit'
+        // 'user'
     ],
 }
 

@@ -10,6 +10,7 @@ const types = {
   SET_CONFIRM: 'SET_CONFIRM',
 
   SET_NAVIGATION: 'SET_NAVIGATION',
+  SET_USER: 'SET_USER',
 
 };
 
