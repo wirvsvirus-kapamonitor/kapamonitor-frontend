@@ -16,6 +16,7 @@
     "clsx": "latest",
     "leaflet": "1.6.0",
     "leaflet.markercluster": "1.4.1",
+    "oidc-client": "^1.10.1",
     "react": "latest",
     "react-dom": "latest",
     "react-leaflet": "2.6.0",
