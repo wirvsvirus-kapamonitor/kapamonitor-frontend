@@ -14,12 +14,23 @@ import Leaflet from './containers/Leaflet/Leaflet';
 import UserNotice from './components/UserNotice/UserNotice';
 import Login from './containers/Signin-oidc';
 
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseAppAuth = firebaseApp.auth();
+const providers = {
+    googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
 
 const NotFound = () => {
     return <div>NotFound</div>;
 };
 
-const DashboardRoute = ({ component: Component, ...rest }) => {
+
+const DashboardRoute = ({ component: Componeynt, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -47,28 +58,46 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 
 class App extends Component {
 
-
     render() {
+        const {
+            user,
+            signOut,
+            signInWithGoogle,
+        } = this.props;
         // const { settings } = this.props;
-
         return (
-            <MuiThemeProvider>
-                <CssBaseline/>
-                <div style={{ height: '100vh' }}>
-                    <Router>
-                        <Switch>
-                            <DashboardRoute path="/dashboard" component={Dashboard}/>
-                            <DashboardRoute path="/map" component={Leaflet}/>
-                            <DashboardRoute path="/signin-oidc" component={Login}/>
-                            <DashboardRoute path="/register" component={Register}/>
-                            <DashboardRoute path="/setting" component={Setting}/>
-                            <DashboardRoute exact path="/" component={Dashboard}/>
-                            <EmptyRoute component={NotFound}/>
-                        </Switch>
-                    </Router>
-                </div>
-                <UserNotice/>
-            </MuiThemeProvider>
+            // <MuiThemeProvider>
+            //     <CssBaseline/>
+            //     <div style={{ height: '100vh' }}>
+            //         <Router>
+            //             <Switch>
+            //                 <DashboardRoute path="/dashboard" component={Dashboard}/>
+            //                 <DashboardRoute path="/map" component={Leaflet}/>
+            //                 <DashboardRoute path="/signin-oidc" component={Login}/>
+            //                 <DashboardRoute path="/register" component={Register}/>
+            //                 <DashboardRoute path="/setting" component={Setting}/>
+            //                 <DashboardRoute exact path="/" component={Dashboard}/>
+            //                 <EmptyRoute component={NotFound}/>
+            //             </Switch>
+            //         </Router>
+            //     </div>
+            //     <UserNotice/>
+            // </MuiThemeProvider>
+            <div className="App">
+                <header className="App-header">
+
+                    {
+                        user
+                            ? <p>Hello, {user.displayName}</p>
+                            : <p>Please sign in.</p>
+                    }
+                    {
+                        user
+                            ? <button onClick={signOut}>Sign out</button>
+                            : <button onClick={signInWithGoogle}>Sign in with Google</button>
+                    }
+                </header>
+            </div>
         );
     }
 
@@ -79,7 +108,11 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(
+
+export default withFirebaseAuth({
+    providers,
+    firebaseAppAuth,
+})(connect(
     mapStateToProps,
     null
-)(App);
+)(App));
