@@ -3,11 +3,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import PersonIcon from "@material-ui/icons/Person";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
 
 const styles = theme => ({
   toolbarRoot: {
@@ -25,6 +25,9 @@ const styles = theme => ({
   },
   logoImg: {
     width: 85,
+  },
+  imprint: {
+    marginRight: 50,
   }
 });
 
@@ -52,6 +55,17 @@ const Header = props => {
         <div className={classes.logo}>
           <img src="/kapa_hands.png" className={classes.logoImg}/>
         </div>
+
+        <Typography
+            color="inherit"
+            noWrap
+            className={classes.imprint}
+        >
+          <Link href="/imprint" color="inherit">
+            Impressum
+          </Link>
+        </Typography>
+
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />

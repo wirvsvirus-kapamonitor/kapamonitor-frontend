@@ -11,6 +11,7 @@ import EmptyLayout from './layouts/EmptyLayout';
 import Register from './containers/Register/Register';
 import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
+import Imprint from './containers/Imprint';
 import UserNotice from './components/UserNotice/UserNotice';
 
 
@@ -60,6 +61,7 @@ class App extends Component {
                             <DashboardRoute path="/map" component={Leaflet}/>
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
+                            <DashboardRoute path="/imprint" component={Imprint}/>
                             <DashboardRoute exact path="/" component={Dashboard}/>
                             <EmptyRoute component={NotFound}/>
                         </Switch>
