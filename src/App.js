@@ -7,7 +7,7 @@ import MainLayout from './layouts/MainLayout';
 import EmptyLayout from './layouts/EmptyLayout';
 
 import * as firebase from 'firebase';
-import firebaseConfig from './firebaseConfig';
+import { config } from './config';
 import { setUser } from './store/user/actions';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
@@ -18,7 +18,7 @@ import Setting from './containers/Setting';
 import Register from './containers/Register/Register';
 import UserNotice from './components/UserNotice/UserNotice';
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config.firebaseConfig);
 
 const NotFound = () => {
     return <Redirect path="/login" component={LoginPage}/>;
