@@ -1,7 +1,18 @@
 import axios from "axios";
+import * as firebase from 'firebase';
+import { config } from '../config';
 
-const BASE_URL = "http://wirvsvirusapplication-1852808866.eu-central-1.elb.amazonaws.com/api";
+const instance = axios.create({baseURL: config.API_URL, headers: {accept: "text/plain"}});
+var configAxios = { }
 
-const instance = axios.create({baseURL: BASE_URL, headers: {accept: "text/plain"}});
+export const getAllLocations = async () => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+        let token = await user.getIdToken();
+        configAxios = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+    }
 
-export const getAllLocations = () => instance.get("/Location");
+    return instance.get("/Location", configAxios);
+} 
