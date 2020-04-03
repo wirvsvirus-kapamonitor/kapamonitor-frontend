@@ -68,9 +68,7 @@ function LoginPage(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(email, pw)
         firebase.auth().signInWithEmailAndPassword(email, pw).then(res=>{
-            console.log(res)
             if(res){
                 props.setUser(res)
             } else {
