@@ -114,6 +114,13 @@ function LoginPage(props) {
                             onChange={e => setPw(e.target.value)}
                             autoComplete="current-password"
                         />
+                        <div>
+                            <h4>Demo user:</h4>
+                            <p id="demoUserInfo">
+                                kapamonitor@gmail.com <br />
+                                123456
+                            </p>
+                        </div>
                         {/*<FormControlLabel*/}
                         {/*    control={<Checkbox value="remember" color="primary"/>}*/}
                         {/*    label="Remember me"*/}
