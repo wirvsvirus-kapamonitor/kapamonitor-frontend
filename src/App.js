@@ -12,6 +12,7 @@ import Register from './containers/Register/Register';
 import Dashboard from './containers/Dashboard';
 import Leaflet from './containers/Leaflet/Leaflet';
 import UserNotice from './components/UserNotice/UserNotice';
+import Sponsors from "./containers/Sponsors";
 
 
 const NotFound = () => {
@@ -60,6 +61,7 @@ class App extends Component {
                             <DashboardRoute path="/map" component={Leaflet}/>
                             <DashboardRoute path="/register" component={Register}/>
                             <DashboardRoute path="/setting" component={Setting}/>
+                            <DashboardRoute path="/sponsors" component={Sponsors}/>>
                             <DashboardRoute exact path="/" component={Dashboard}/>
                             <EmptyRoute component={NotFound}/>
                         </Switch>

@@ -8,6 +8,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import PersonIcon from "@material-ui/icons/Person";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
 
 const styles = theme => ({
   toolbarRoot: {
@@ -25,6 +26,9 @@ const styles = theme => ({
   },
   logoImg: {
     width: 85,
+  },
+  sponsors: {
+    marginRight: 50,
   }
 });
 
@@ -52,6 +56,17 @@ const Header = props => {
         <div className={classes.logo}>
           <img src="/kapa_hands.png" className={classes.logoImg}/>
         </div>
+
+        <Typography
+            color="inherit"
+            noWrap
+            className={classes.sponsors}
+        >
+          <Link href="/sponsors" color="inherit">
+            Sponsoren
+          </Link>
+        </Typography>
+
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />
