@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 
 import { useHistory } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     root: {
@@ -44,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const BottomNavigationBar = props => {
+    const { t } = useTranslation();
     const history = useHistory();
 
     const classes = useStyles();
@@ -59,13 +62,13 @@ const BottomNavigationBar = props => {
     return (
         <BottomNavigation value={props.nav} onChange={handleChange} className={classes.root}>
             {/*<Link to="/dashboard" onClick={()=>handleChange("dashboard")}>*/}
-            <BottomNavigationAction label="Übersicht" value="dashboard" icon={<DashboardIcon/>}/>
+            <BottomNavigationAction label={t('BottomNavigationBar.Dashboard')} value="dashboard" icon={<DashboardIcon/>}/>
             {/*</Link>*/}
             {/*<Link to="/map" onClick={()=>handleChange("map")}>*/}
-            <BottomNavigationAction label="Karte" value="map" icon={<MapIcon/>}/>
+            <BottomNavigationAction label={t('BottomNavigationBar.Map')} value="map" icon={<MapIcon/>}/>
             {/*</Link>*/}
             {/*<Link to="/register" onClick={()=>handleChange("register")}>*/}
-            // <BottomNavigationAction label="Hinzufügen" value="register" icon={<CreateIcon/>}/>
+            // <BottomNavigationAction label={t('BottomNavigationBar.Add')} value="register" icon={<CreateIcon/>}/>
             {/*<BottomNavigationAction label="Signin" value="signin-oidc" icon={<LoginIcon/>}/>*/}
             {/*</Link>*/}
             {/*<Link to={"setting"}><BottomNavigationAction label="Profile" value="profile" icon={<SettingsIcon/>}/></Link>*/}
