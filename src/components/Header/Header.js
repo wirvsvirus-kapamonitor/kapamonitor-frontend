@@ -13,6 +13,8 @@ import * as firebase from 'firebase';
 import { setUser } from '../../store/user/actions';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import LanguageDropdown from "../LanguageDropdown"
+
 const useStyles = makeStyles((theme) => ({
   toolbarRoot: {
     paddingRight: 24
@@ -62,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
             <NotificationsIcon />
           </Badge>
         </IconButton>
+        <LanguageDropdown />
         <IconButton color="inherit">
           {/*<PersonIcon />*/}
           <Exit onClick={()=>{

@@ -20,6 +20,8 @@ import { HospitalDetail } from '../components/HospitalDetail';
 import { setRawLocations } from '../store/leaflet/actions';
 import { connect } from 'react-redux';
 
+import { useTranslation } from "react-i18next";
+
 export const headCells = [
     { id: 'type', label: 'Typ', numberic: false },
     { id: 'title', label: 'Name', numberic: false },
@@ -81,6 +83,8 @@ const getCellContent = (row, cellId) => {
 };
 
 const Dashboard = props => {
+    const { t } = useTranslation();
+
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -112,6 +116,7 @@ const Dashboard = props => {
         setOpen(false);
     };
     return (<PaddingLayout>
+        <h2 key="heading">{t('DashboardTitle')}</h2>
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
